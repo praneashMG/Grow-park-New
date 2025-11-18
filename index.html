@@ -2217,6 +2217,501 @@
   100% { transform: scale(1.05) translate(0, 0); }
 }
 
+/* -------------------------------------- */
+/* ACHIEVEMENTS – OLD THEME + FX          */
+/* -------------------------------------- */
+
+.achievements {
+  position: relative;
+  padding: 90px 16px 100px;
+  background: #050505;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+  overflow: hidden;
+}
+
+/* subtle glow */
+.achievements::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 65%);
+  top: -220px;
+  right: -180px;
+  filter: blur(8px);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.achievements-inner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1;
+}
+
+/* GLITCHY TITLE */
+.achievements-title {
+  display: inline-block;
+  font-size: clamp(22px, 3vw, 30px);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 12px;
+  position: relative;
+  text-shadow:
+    0 0 1px #ffffff,
+    0 0 4px rgba(255,255,255,0.6);
+  overflow: hidden;
+}
+
+/* glitch pseudo */
+.achievements-title::before,
+.achievements-title::after {
+  content: "Our Archivements Number";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.achievements-title::before {
+  transform: translate(1px, -1px);
+  clip-path: inset(0 0 45% 0);
+}
+
+.achievements-title::after {
+  transform: translate(-1px, 1px);
+  clip-path: inset(55% 0 0 0);
+}
+
+/* glitch animation only when visible */
+.achievements-visible .achievements-title::before,
+.achievements-visible .achievements-title::after {
+  animation: titleGlitch 0.9s steps(4) 1;
+}
+
+@keyframes titleGlitch {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-2px, 1px); }
+  40%  { transform: translate(2px, -1px); }
+  60%  { transform: translate(-1px, 2px); }
+  80%  { transform: translate(1px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+.achievements-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #e5e5e5;
+  max-width: 620px;
+  margin: 0 auto 30px;
+  opacity: 0.9;
+}
+
+/* GRID */
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* responsive grid */
+@media (max-width: 900px) {
+  .achievements-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .achievements-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* BOXES – retro stat tiles */
+
+.achievement-box {
+  position: relative;
+  padding: 18px 16px 16px;
+  border-radius: 18px;
+  background: #000000;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    0 18px 45px rgba(0,0,0,1),
+    0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+  transform: translateY(22px);
+  opacity: 0;
+}
+
+/* dashed inner frame */
+.achievement-box::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 12px;
+  border: 1px dashed rgba(255,255,255,0.16);
+  pointer-events: none;
+}
+
+/* stagger animation when section visible */
+.achievements-visible .achievement-box {
+  animation: boxFadeUp 0.8s ease-out forwards;
+}
+
+.achievements-visible .achievement-box:nth-child(1) { animation-delay: 0.1s; }
+.achievements-visible .achievement-box:nth-child(2) { animation-delay: 0.25s; }
+.achievements-visible .achievement-box:nth-child(3) { animation-delay: 0.4s; }
+.achievements-visible .achievement-box:nth-child(4) { animation-delay: 0.55s; }
+
+@keyframes boxFadeUp {
+  0%   { opacity: 0; transform: translateY(22px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* NUMBERS */
+
+.achievement-number {
+  font-size: 26px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+/* pulse + slight flicker when visible */
+.achievements-visible .achievement-number {
+  animation: numberPulse 1.3s ease-in-out 2;
+}
+
+@keyframes numberPulse {
+  0%   { transform: scale(1);   text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+  50%  { transform: scale(1.06); text-shadow: 0 0 10px rgba(255,255,255,0.9); }
+  100% { transform: scale(1);   text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+}
+
+/* individual digit style */
+.achievement-number .count {
+  font-weight: 700;
+}
+
+/* LABEL */
+
+.achievement-label {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #e5e5e5;
+  opacity: 0.9;
+}
+/* -------------------------------------- */
+/* TESTIMONIALS – OLD THEME + ANIMATION   */
+/* -------------------------------------- */
+
+.testimonials {
+  position: relative;
+  padding: 90px 16px 100px;
+  background: #050505;
+  border-top: 1px solid rgba(255,255,255,0.16);
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+  overflow: hidden;
+}
+
+/* film glow */
+.testimonials::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 65%);
+  top: -220px;
+  left: -180px;
+  filter: blur(8px);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* animated grain overlay */
+.testimonials::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  animation: grainDrift 2.4s linear infinite;
+}
+
+@keyframes grainDrift {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(-12px, 8px); }
+  100% { transform: translate(0, 0); }
+}
+
+.testimonials-inner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1;
+}
+
+/* HEADER */
+
+.testimonials-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #f5f5f5;
+  margin-bottom: 8px;
+}
+
+.testimonials-title {
+  font-size: clamp(22px, 3vw, 30px);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 10px;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+/* underline with moving highlight */
+.testimonials-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.testimonials-title::before {
+  content: "";
+  position: absolute;
+  left: -100%;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.9),
+    transparent
+  );
+  animation: titleShine 2.6s infinite;
+}
+
+@keyframes titleShine {
+  0%   { left: -100%; }
+  50%  { left: 100%; }
+  100% { left: 100%; }
+}
+
+.testimonials-subtitle {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #e5e5e5;
+  max-width: 520px;
+  margin: 0 auto 30px;
+  opacity: 0.9;
+}
+
+/* GRID LAYOUT: 3 → 2 → 1 */
+
+.testimonial-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 960px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonial-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* CARDS – retro cards with scanline */
+
+.testimonial-card {
+  position: relative;
+  padding: 18px 16px 16px;
+  border-radius: 18px;
+  background: #000000;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,1),
+    0 0 0 1px rgba(255,255,255,0.04);
+  text-align: left;
+  overflow: hidden;
+  transform: translateY(24px) scale(0.97);
+  opacity: 0;
+  animation: cardIn 0.9s ease-out forwards;
+}
+
+/* stagger entrance */
+.testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+.testimonial-card:nth-child(2) { animation-delay: 0.22s; }
+.testimonial-card:nth-child(3) { animation-delay: 0.34s; }
+.testimonial-card:nth-child(4) { animation-delay: 0.46s; }
+.testimonial-card:nth-child(5) { animation-delay: 0.58s; }
+.testimonial-card:nth-child(6) { animation-delay: 0.7s; }
+
+@keyframes cardIn {
+  0%   { opacity: 0; transform: translateY(24px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* inner dashed frame */
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 12px;
+  border: 1px dashed rgba(255,255,255,0.16);
+  pointer-events: none;
+}
+
+/* moving scanline overlay */
+.testimonial-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.12),
+    transparent 40%,
+    transparent 60%,
+    rgba(255,255,255,0.06)
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  animation: cardScan 4s ease-in-out infinite;
+}
+
+@keyframes cardScan {
+  0%   { opacity: 0; transform: translateY(-100%); }
+  40%  { opacity: 0; transform: translateY(-100%); }
+  55%  { opacity: 0.5; transform: translateY(0); }
+  70%  { opacity: 0; transform: translateY(100%); }
+  100% { opacity: 0; transform: translateY(100%); }
+}
+
+/* accent cards = inverted look slightly */
+.testimonial-card--accent {
+  background: #050505;
+  border-color: rgba(255,255,255,0.35);
+  box-shadow:
+    0 22px 50px rgba(0,0,0,1),
+    0 0 0 1px rgba(255,255,255,0.12);
+}
+
+/* TEXT */
+
+.testimonial-text {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #e5e5e5;
+  margin-bottom: 18px;
+  position: relative;
+  padding-left: 20px;
+}
+
+/* quote symbol */
+.testimonial-text::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  top: -6px;
+  font-size: 28px;
+  opacity: 0.6;
+}
+
+/* FOOTER */
+
+.testimonial-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* avatar as vintage circle */
+
+.testimonial-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.7);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5), transparent 60%),
+    #050505;
+  box-shadow: 0 0 0 1px rgba(0,0,0,1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* fake scan ring inside avatar */
+.testimonial-avatar::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: inherit;
+  border: 1px dashed rgba(255,255,255,0.3);
+  opacity: 0.7;
+}
+
+.testimonial-person {
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.testimonial-role {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.8;
+}
+
+/* HOVER EFFECT – subtle lift + glow */
+
+.testimonial-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,1),
+    0 0 0 1px rgba(255,255,255,0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
   </style>
 </head>
 <body>
@@ -2683,5 +3178,185 @@
       });
     })();
   </script>
+  <!-- ACHIEVEMENTS SECTION -->
+<section class="achievements" id="achievements">
+  <div class="achievements-inner">
+    <h2 class="achievements-title">Our Archivements Number</h2>
+    <p class="achievements-text">
+      Zigson has successfully helped hundreds of clients buy, sell, and invest in properties
+      across India. Our dedication to excellence and transparency has made us a trusted
+      name in real estate.
+    </p>
+
+    <div class="achievements-grid">
+      <div class="achievement-box">
+        <div class="achievement-number">
+          <span class="count" data-target="500">0</span>+
+        </div>
+        <p class="achievement-label">Listing Submitted</p>
+      </div>
+
+      <div class="achievement-box">
+        <div class="achievement-number">
+          <span class="count" data-target="350">0</span>+
+        </div>
+        <p class="achievement-label">Property Selling</p>
+      </div>
+
+      <div class="achievement-box">
+        <div class="achievement-number">
+          <span class="count" data-target="250">0</span>+
+        </div>
+        <p class="achievement-label">House Building</p>
+      </div>
+
+      <div class="achievement-box">
+        <div class="achievement-number">
+          <span class="count" data-target="10">0</span>K
+        </div>
+        <p class="achievement-label">Happy People</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JS: COUNTERS + ANIMATION TRIGGER -->
+<script>
+  function animateCounters() {
+    const counters = document.querySelectorAll('.count');
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      const duration = 1800; // ms
+      const startTime = performance.now();
+
+      function update(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const value = Math.floor(progress * target);
+        counter.textContent = value;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    });
+  }
+
+  const section = document.getElementById('achievements');
+  let hasRun = false;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasRun) {
+        hasRun = true;
+        section.classList.add('achievements-visible'); // 🔥 triggers CSS animations
+        animateCounters();
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  if (section) {
+    observer.observe(section);
+  }
+</script>
+<!-- HAPPY CLIENTS FEEDBACK -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <p class="testimonials-eyebrow">BEST OF TESTIMONIAL</p>
+    <h2 class="testimonials-title">Our Happy Clients Feedback</h2>
+    <p class="testimonials-subtitle">
+      Helping you find the perfect property with trust, transparency, and unmatched expertise.
+    </p>
+
+    <div class="testimonial-grid">
+      <!-- 1 -->
+      <article class="testimonial-card">
+        <p class="testimonial-text">
+          Zigson made buying my first home simple and stress-free. Their team was always supportive
+          and professional.
+        </p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar"></div>
+          <div class="testimonial-person">
+            <span class="testimonial-name">John Doe</span>
+            <span class="testimonial-role">Designer</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 (accent) -->
+      <article class="testimonial-card testimonial-card--accent">
+        <p class="testimonial-text">
+          I sold my property above market value thanks to Zigson. Transparent and trustworthy service
+          throughout.
+        </p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar"></div>
+          <div class="testimonial-person">
+            <span class="testimonial-name">John Doe</span>
+            <span class="testimonial-role">Designer</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="testimonial-card">
+        <p class="testimonial-text">
+          Investing in real estate was easy with their guidance. They truly understand the local market.
+        </p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar"></div>
+          <div class="testimonial-person">
+            <span class="testimonial-name">John Doe</span>
+            <span class="testimonial-role">Designer</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 (accent) -->
+      <article class="testimonial-card testimonial-card--accent">
+        <p class="testimonial-text">
+          From start to finish, Zigson handled everything flawlessly. Highly recommend for buyers and
+          sellers alike.
+        </p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar"></div>
+          <div class="testimonial-person">
+            <span class="testimonial-name">John Doe</span>
+            <span class="testimonial-role">Designer</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="testimonial-card">
+        <p class="testimonial-text">
+          Professional, responsive, and reliable — Zigson helped me find the perfect property in no time.
+        </p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar"></div>
+          <div class="testimonial-person">
+            <span class="testimonial-name">John Doe</span>
+            <span class="testimonial-role">Designer</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6 (accent) -->
+      <article class="testimonial-card testimonial-card--accent">
+        <p class="testimonial-text">
+          A team that genuinely cares about clients. I got exactly what I needed, on time and hassle-free.
+        </p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar"></div>
+          <div class="testimonial-person">
+            <span class="testimonial-name">John Doe</span>
+            <span class="testimonial-role">Designer</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
 </body>
 </html>
