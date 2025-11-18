@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ZIGSON - Find Your Dream Home Today (Black & White 3D)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root{
+      --black:#000000;
+      --white:#ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html,body{height:100%;}
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      perspective: 1000px; /* enables 3D perspective for children */
+      -webkit-perspective: 1000px;
+      overflow-x: hidden;
+    }
+
+    /* --------------------------------------------- */
+    /* NAVBAR (black/white + 3D effects)             */
+    /* --------------------------------------------- */
+
+    .navbar {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 40px);
+      max-width: 1100px;
+      height: 72px;
+      background: var(--white);
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      z-index: 50;
+      border-radius: 12px;
+      box-shadow: 0 22px 40px rgba(255,255,255,0.03), 0 6px 18px rgba(0,0,0,0.6);
+      transform-style: preserve-3d;
+      transition: transform 0.35s cubic-bezier(.2,.9,.3,1), box-shadow 0.25s ease;
+    }
+
+    .navbar:hover{
+      transform: translateX(-50%) translateZ(18px) rotateX(1.2deg);
+      box-shadow: 0 36px 80px rgba(255,255,255,0.03), 0 10px 30px rgba(0,0,0,0.7);
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .brand {
+      font-weight: 900;
+      font-size: 20px;
+      color: var(--black);
+      letter-spacing: 1px;
+      transform: translateZ(28px);
+      text-shadow: 0 6px 10px rgba(0,0,0,0.25);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      font-size: 15px;
+    }
+
+    .nav-links a {
+      position: relative;
+      color: var(--black);
+      padding: 8px 2px;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.28s cubic-bezier(.2,.9,.3,1), color 0.18s ease;
+      transform-origin: center center;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+
+    .nav-links a::after{
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 2px;
+      width: 0;
+      height: 2px;
+      background: var(--black);
+      transition: width 0.22s ease;
+      transform-origin: left center;
+      transform: translateZ(10px);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after{ width: 100%; }
+
+    .nav-links a:hover{
+      transform: translateY(-8px) rotateX(6deg) translateZ(18px);
+      color: var(--black);
+      text-shadow: 0 12px 28px rgba(0,0,0,0.45);
+    }
+
+    .nav-links a.active{
+      color: var(--black);
+      font-weight:700;
+      transform: translateZ(12px);
+    }
+
+    .nav-cta {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 2px solid var(--black);
+      background: var(--black);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transform: translateZ(24px);
+      box-shadow: 0 22px 40px rgba(0,0,0,0.7);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+
+    .nav-cta:hover{
+      transform: translateZ(28px) translateY(-6px);
+      filter: brightness(1.06);
+      box-shadow: 0 34px 64px rgba(0,0,0,0.75);
+    }
+
+    /* --------------------------------------------- */
+    /* MOBILE DRAWER / HAMBURGER MENU (black/white)  */
+    /* --------------------------------------------- */
+
+    .nav-toggle{
+      display:none;
+      width:44px;height:44px;border-radius:999px;border:none;background:var(--black);padding:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;box-shadow:0 8px 20px rgba(255,255,255,0.03);
+    }
+    .nav-toggle span{ width:22px;height:2px;background:var(--white);border-radius:999px;display:block;transition:transform .25s ease, opacity .25s ease;}
+
+    body.nav-open .nav-toggle span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+    body.nav-open .nav-toggle span:nth-child(2){ opacity:0; }
+    body.nav-open .nav-toggle span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+    .mobile-nav-overlay{
+      position: fixed; inset:0; background: rgba(255,255,255,0.06); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:48;
+    }
+
+    .mobile-nav{
+      position: fixed; top: 0; right: -320px; width: 300px; height:100vh; background: var(--black); color:var(--white); padding:22px; display:flex;flex-direction:column;gap:18px; transition: transform .36s cubic-bezier(.2,.9,.3,1); z-index:49; transform-origin: right center; transform-style: preserve-3d;
+      border-left: 1px solid rgba(255,255,255,0.04);
+    }
+
+    body.nav-open .mobile-nav{ transform: translateX(-320px) rotateY(-14deg); }
+    body.nav-open .mobile-nav-overlay{ opacity:1; pointer-events:auto; }
+
+    .mobile-nav-header{ display:flex; align-items:center; justify-content:space-between; }
+    .mobile-nav-header .brand{ font-size:18px; font-weight:900; color:var(--white); transform: translateZ(20px); }
+    .mobile-close{ border:none; background:transparent; color:var(--white); font-size:28px; cursor:pointer; }
+
+    .mobile-nav-links{ list-style:none; padding:12px 0; border-top:1px solid rgba(255,255,255,0.03); border-bottom:1px solid rgba(255,255,255,0.03); }
+    .mobile-nav-links li{ margin-bottom:8px; }
+    .mobile-nav-links a{ display:block; padding:12px 10px; color:var(--white); text-decoration:none; border-radius:8px; transition: transform .18s ease, background .18s ease; }
+    .mobile-nav-links a:hover, .mobile-nav-links a.active{ background: rgba(255,255,255,0.06); transform: translateX(8px) translateZ(12px) rotateX(4deg); }
+
+    .mobile-nav-cta{ margin-top:6px; padding:12px 16px; border-radius:999px; border:2px solid var(--white); background:var(--white); color:var(--black); font-weight:800; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; transform: translateZ(18px); }
+    .mobile-nav-cta:hover{ transform: translateZ(22px) translateY(-6px); }
+
+    @media (max-width: 900px){
+      .nav-links{ display:none; }
+      .nav-cta{ display:none; }
+      .nav-toggle{ display:inline-flex; }
+      .navbar{ padding: 0 14px; left: 14px; transform: none; width: calc(100% - 28px); }
+      .navbar:hover{ transform:none; }
+    }
+
+    /* small utility section to show contrast and 3D depth below navbar */
+    main{ padding-top: 120px; display:flex; align-items:center; justify-content:center; min-height:calc(100vh - 120px); }
+
+    .hero-card{
+      width: min(1100px, 94%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: 14px;
+      padding: 48px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 8px 30px rgba(255,255,255,0.02) inset;
+      transform: translateZ(12px) rotateX(2deg);
+    }
+
+    .hero-title{ font-size:34px; font-weight:800; color:var(--white); text-shadow: 0 20px 40px rgba(0,0,0,0.8); margin-bottom:12px; }
+    .hero-sub{ color:rgba(255,255,255,0.85); font-size:16px; max-width:760px; }
+
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-left">
+      <div class="brand">ZIGSON</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.htm">About Us</a></li>
+        <li><a href="feature-listings.html">Feature Listings</a></li>
+        <li><a href="contact-us.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <button type="button" class="nav-cta" aria-label="Contact us">Contact Us</button>
+    <button type="button" class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile side drawer -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <div class="mobile-nav-header">
+      <span class="brand">ZIGSON</span>
+      <button type="button" class="mobile-close" aria-label="Close navigation">×</button>
+    </div>
+
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="feature-listings.html">Feature Listings</a></li>
+      <li><a href="contact-us.html">Contact Us</a></li>
+    </ul>
+
+    <button type="button" class="mobile-nav-cta">Contact Us</button>
+  </nav>
+
+  <main>
+    <section class="hero-card" aria-labelledby="heroTitle">
+      <h1 id="heroTitle" class="hero-title">Find your dream home — in bold black & white.</h1>
+      <p class="hero-sub">A clean, high-contrast UI with subtle 3D depth for the navigation and controls. Hover the navbar and links to see the layered 3D motion. This design strictly uses black and white tones only.</p>
+    </section>
+  </main>
+
+ <!-- JS: MOBILE NAV -->
+  <script>
+    (function () {
+      const toggle = document.querySelector('.nav-toggle');
+      const overlay = document.querySelector('.mobile-nav-overlay');
+      const closeBtn = document.querySelector('.mobile-close');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+
+      function openNav() {
+        document.body.classList.add('nav-open');
+      }
+
+      function closeNav() {
+        document.body.classList.remove('nav-open');
+      }
+
+      if (toggle) {
+        toggle.addEventListener('click', function () {
+          if (document.body.classList.contains('nav-open')) {
+            closeNav();
+          } else {
+            openNav();
+          }
+        });
+      }
+
+      if (overlay) overlay.addEventListener('click', closeNav);
+      if (closeBtn) closeBtn.addEventListener('click', closeNav);
+
+      mobileLinks.forEach(function (link) {
+        link.addEventListener('click', closeNav);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeNav();
+      });
+    })();
+  </script>
+</body>
+</html>
