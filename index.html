@@ -2710,6 +2710,196 @@
     0 0 0 1px rgba(255,255,255,0.12);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+/* -------------------------------------- */
+/* FOOTER – OLD THEME + RESPONSIVE        */
+/* -------------------------------------- */
+
+.footer {
+  position: relative;
+  background: #050505;
+  color: #f5f5f5;
+  padding: 50px 16px 26px;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  overflow: hidden;
+}
+
+/* subtle glow */
+.footer::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 65%);
+  top: -220px;
+  left: -160px;
+  filter: blur(8px);
+  opacity: 0.75;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* faint film grain */
+.footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.24;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.footer-container {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto 26px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px;
+  z-index: 1;
+}
+
+/* responsive layout: 4 → 2 → 1 */
+@media (max-width: 960px) {
+  .footer-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* columns */
+
+.footer-column {
+  position: relative;
+  padding-right: 10px;
+}
+
+/* small vertical accent line on titles */
+.footer-title {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-title::before {
+  content: "";
+  width: 12px;
+  height: 1px;
+  background: #ffffff;
+  box-shadow: 0 0 6px rgba(255,255,255,0.9);
+}
+
+/* body text */
+
+.footer-text {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #e5e5e5;
+  opacity: 0.9;
+}
+
+/* links */
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li + li {
+  margin-top: 6px;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: #d4d4d4;
+  text-decoration: none;
+  position: relative;
+  padding-left: 14px;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+/* bullet style like old list marker */
+.footer-links a::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* hover effect: slight lift & brighten */
+.footer-links a:hover {
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+/* HR line */
+
+.footer-line {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  max-width: 1120px;
+  margin: 0 auto 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* FOOTER BOTTOM */
+
+.footer-bottom {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #d4d4d4;
+  position: relative;
+  z-index: 1;
+}
+
+/* responsive bottom layout */
+@media (max-width: 640px) {
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+}
+
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-bottom-links a {
+  font-size: 12px;
+  text-decoration: none;
+  color: #d4d4d4;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom-links a:hover {
+  color: #ffffff;
+}
 
 
   </style>
@@ -3357,6 +3547,59 @@
   </div>
 </section>
 
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-column">
+            <h3 class="footer-title">ABOUT ZIGSON</h3>
+            <p class="footer-text">
+                Premium real estate solutions trusted by thousands of homeowners and investors
+                nationwide.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3 class="footer-title">QUICK LINKS</h3>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="feature-listings.html">Featured Listing</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3 class="footer-title">RESOURCES</h3>
+            <ul class="footer-links">
+                <li><a href="#">Buying Guide</a></li>
+                <li><a href="#">Selling Tips</a></li>
+                <li><a href="#">Market Report</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3 class="footer-title">CONTACT</h3>
+            <ul class="footer-links">
+                <li><a href="mailto:info@zigson.com">info@zigson.com</a></li>
+                <li><a href="#">+1 (800) 123-4567</a></li>
+                <li><a href="#">123 Real Estate Ave, CA 90210</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <hr class="footer-line">
+
+    <div class="footer-bottom">
+        <p>© 2025 Zigson Real Estate. All rights reserved.</p>
+        <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <span>|</span>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>
