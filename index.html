@@ -1247,6 +1247,166 @@
   }
 }
 
+/* -------------------------------------- */
+/* PROMISE SECTION – FLOATING 3D HERO     */
+/* -------------------------------------- */
+
+.promise-section {
+  position: relative;
+  padding: 120px 16px;
+  background: #050505;
+  overflow: hidden;
+}
+
+/* floating background blobs */
+.promise-section::before,
+.promise-section::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+  filter: blur(10px);
+  opacity: 0.8;
+  animation: blobFloat 12s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.promise-section::before {
+  top: -160px;
+  left: -140px;
+  animation-delay: 0s;
+}
+
+.promise-section::after {
+  bottom: -160px;
+  right: -140px;
+  animation-delay: 4s;
+}
+
+/* background blob animation */
+@keyframes blobFloat {
+  0%,100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(40px) scale(1.08); }
+}
+
+/* MAIN FLOATING CARD */
+.promise-inner {
+  max-width: 760px;
+  margin: auto;
+  text-align: center;
+  padding: 60px 40px;
+  border-radius: 24px;
+
+  background: rgba(0, 0, 0, 0.78);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 40px 120px rgba(0,0,0,0.9),
+    0 0 0 1px rgba(255,255,255,0.05);
+
+  transform-style: preserve-3d;
+  animation: floatCard 6s ease-in-out infinite;
+}
+
+/* main floating breathing */
+@keyframes floatCard {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-12px) scale(1.02); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+/* overlay shine */
+.promise-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.12), transparent 50%);
+  pointer-events: none;
+}
+
+/* LABEL */
+.promise-label {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.15);
+
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(4px);
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  margin-bottom: 18px;
+  animation: floatSmall 5s infinite ease-in-out;
+}
+
+@keyframes floatSmall {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* TITLE */
+.promise-title {
+  font-size: clamp(26px, 3.8vw, 42px);
+  letter-spacing: 0.04em;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  animation: floatSmall 7s infinite ease-in-out;
+}
+
+/* TEXT */
+.promise-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #e5e5e5;
+  opacity: 0.9;
+  max-width: 620px;
+  margin: 0 auto 30px;
+  animation: floatSmall 9s infinite ease-in-out;
+}
+
+/* BUTTON */
+.promise-btn {
+  padding: 14px 34px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 14px 0 #cfcfcf,
+    0 30px 40px rgba(0,0,0,1);
+
+  transition: 0.25s ease;
+}
+
+.promise-btn:hover {
+  transform: translateY(4px);
+  box-shadow:
+    0 8px 0 #cfcfcf,
+    0 12px 18px rgba(0,0,0,1);
+}
+
+.promise-btn:active {
+  transform: translateY(7px);
+  box-shadow:
+    0 0 0 #cfcfcf,
+    0 6px 10px rgba(0,0,0,1);
+}
+
+
   </style>
 </head>
 <body>
@@ -1433,6 +1593,21 @@
     </div>
   </div>
 </section>
+<!-- PROMISE FULL-WIDTH HERO WITH BACKGROUND IMAGE -->
+<section class="promise-section">
+  <div class="promise-inner">
+    <div class="promise-label">OUR PROMISE</div>
+    <h2 class="promise-title">Making Real Estate Simple &amp; Transparent</h2>
+    <p class="promise-text">
+      At Zigson, we believe everyone deserves access to premium properties. Our mission is to
+      simplify the real estate journey with cutting-edge technology and expert guidance.
+      Whether buying, selling, or investing, we're your trusted partner every step of the way.
+    </p>
+    <button class="promise-btn">BROWSE PROPERTIES</button>
+  </div>
+</section>
+
+
 
   <!-- JS: MOBILE NAV -->
   <script>
