@@ -19,10 +19,6 @@
       min-height: 100vh;
     }
 
-    /* --------------------------------------------- */
-    /* GLOBAL LINKS                                  */
-    /* --------------------------------------------- */
-
     a {
       text-decoration: none;
     }
@@ -60,7 +56,6 @@
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    /* subtle “floating” tilt on hover */
     .navbar:hover {
       transform: translateY(-3px) rotateX(4deg);
       box-shadow:
@@ -68,7 +63,6 @@
         0 0 0 1px rgba(0, 0, 0, 0.12);
     }
 
-    /* glossy top highlight */
     .navbar::before {
       content: "";
       position: absolute;
@@ -99,7 +93,6 @@
       cursor: default;
     }
 
-    /* 3D extruded logo text */
     .brand::before {
       content: "ZIGSON";
       position: absolute;
@@ -130,7 +123,6 @@
       transition: color 0.18s ease, transform 0.18s ease;
     }
 
-    /* 3D underline “bar” */
     .nav-links a::after {
       content: "";
       position: absolute;
@@ -158,7 +150,6 @@
       color: #000000;
     }
 
-    /* 3D pill button */
     .nav-cta {
       position: relative;
       z-index: 1;
@@ -196,7 +187,7 @@
     }
 
     /* --------------------------------------------- */
-    /* MOBILE DRAWER / HAMBURGER – B&W + 3D          */
+    /* MOBILE NAV / DRAWER                          */
     /* --------------------------------------------- */
 
     .nav-toggle {
@@ -360,10 +351,6 @@
       color: #000000;
     }
 
-    /* --------------------------------------------- */
-    /* RESPONSIVE                                    */
-    /* --------------------------------------------- */
-
     @media (max-width: 900px) {
       .nav-links {
         display: none;
@@ -383,12 +370,379 @@
       }
     }
 
-    /* Fill content just for preview (optional) */
-    main {
-      margin-top: 110px;
-      padding: 24px;
+    /* -------------------------------------- */
+    /* FULL-PAGE SPLIT HERO                   */
+    /* -------------------------------------- */
+
+    .hero-split {
+      min-height: 100vh;           /* full screen height */
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 110px 16px 60px;   /* space for fixed navbar + bottom */
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 55%),
+        radial-gradient(circle at bottom, rgba(255, 255, 255, 0.06), #050505 60%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-split::before,
+    .hero-split::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 60%);
+      filter: blur(4px);
+      opacity: 0.7;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-split::before {
+      top: -140px;
+      left: -100px;
+    }
+
+    .hero-split::after {
+      bottom: -160px;
+      right: -140px;
+    }
+
+    .hero-split-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1080px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 32px;
+      align-items: stretch;
+      z-index: 1;
+    }
+
+    /* LEFT – TEXT */
+
+    .hero-text {
+      position: relative;
+      padding: 32px 26px;
+      border-radius: 22px;
+      background: rgba(0, 0, 0, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.95),
+        0 0 0 1px rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-text::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-text::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border-radius: 16px;
+      background-image: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px
+        );
+      background-size: 26px 26px;
+      opacity: 0.4;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-label,
+    .hero-title,
+    .hero-subtitle,
+    .hero-buttons {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 14px;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
       color: #f5f5f5;
-      max-width: 800px;
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.2), #050505);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      border: 1px solid #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 44px);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .hero-title br {
+      display: none;
+    }
+
+    @media (min-width: 520px) {
+      .hero-title br {
+        display: inline;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #e5e5e5;
+      max-width: 420px;
+      margin-bottom: 26px;
+      opacity: 0.9;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-primary,
+    .btn-outline {
+      position: relative;
+      isolation: isolate;
+      padding: 11px 22px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transform: translateY(0);
+      transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: #000000;
+      box-shadow:
+        0 9px 0 #d4d4d4,
+        0 22px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(2px);
+      box-shadow:
+        0 4px 0 #d4d4d4,
+        0 12px 20px rgba(0, 0, 0, 0.9);
+      background: #f5f5f5;
+    }
+
+    .btn-primary:active {
+      transform: translateY(5px);
+      box-shadow:
+        0 0 0 #d4d4d4,
+        0 5px 10px rgba(0, 0, 0, 0.9);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.8);
+    }
+
+    .btn-outline:hover {
+      transform: translateY(2px);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.8);
+      border-color: #ffffff;
+    }
+
+    .btn-outline:active {
+      transform: translateY(5px);
+      box-shadow:
+        0 0 0 rgba(0, 0, 0, 0.8);
+    }
+
+    /* RIGHT – SLIDING IMAGES */
+
+    .hero-visual {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.04);
+      min-height: 320px;
+    }
+
+    .hero-visual-strip {
+      display: flex;
+      width: 200%;
+      height: 100%;
+      animation: slideFrames 9s ease-in-out infinite;
+    }
+
+    .hero-frame {
+      flex: 0 0 50%;
+      position: relative;
+      min-height: 320px;
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%);
+    }
+
+    .frame-1 {
+      background-image: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.1)
+        ),
+        url('https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=800');
+    }
+
+    .frame-2 {
+      background-image: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.1)
+        ),
+        url('https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?auto=compress&cs=tinysrgb&w=800');
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent 35%, transparent 65%, rgba(0, 0, 0, 0.6));
+      pointer-events: none;
+    }
+
+    .hero-visual-badge {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.9);
+    }
+
+    @keyframes slideFrames {
+      0% {
+        transform: translateX(0%);
+      }
+      35% {
+        transform: translateX(0%);
+      }
+      50% {
+        transform: translateX(-50%);
+      }
+      85% {
+        transform: translateX(-50%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+
+    /* -------------------------------------- */
+    /* RESPONSIVE                             */
+    /* -------------------------------------- */
+
+    @media (max-width: 900px) {
+      .hero-split-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .hero-text {
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-split {
+        padding-top: 96px;
+        padding-bottom: 48px;
+      }
+
+      .hero-text {
+        padding: 24px 20px 26px;
+        border-radius: 18px;
+      }
+
+      .hero-visual {
+        min-height: 220px;
+        border-radius: 20px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-primary,
+      .btn-outline {
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-visual-badge {
+        font-size: 9px;
+        letter-spacing: 0.2em;
+      }
     }
   </style>
 </head>
@@ -400,7 +754,7 @@
         <div class="brand">ZIGSON</div>
         <ul class="nav-links">
           <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.htm">About Us</a></li>
+          <li><a href="about.html">About Us</a></li>
           <li><a href="feature-listings.html">Feature Listings</a></li>
           <li><a href="contact-us.html">Contact Us</a></li>
         </ul>
@@ -431,14 +785,38 @@
     <button type="button" class="mobile-nav-cta">Contact Us</button>
   </nav>
 
-  <!-- JUST FOR DEMO -->
-  <main>
-    <h1>Homepage Content</h1>
-    <p>
-      Replace this with your hero section. The navbar is now black & white with 3D-style shadows,
-      pill shape, extruded logo text, and 3D buttons both on desktop and mobile.
-    </p>
-  </main>
+  <!-- FULL-PAGE HERO -->
+  <section class="hero-split">
+    <div class="hero-split-inner">
+      <!-- LEFT: TEXT (UNCHANGED CONTENT) -->
+      <div class="hero-text">
+        <div class="hero-label">ZIGSON</div>
+        <h1 class="hero-title">
+          Find Your Dream <br> Home Today
+        </h1>
+        <p class="hero-subtitle">
+          Discover premium properties and real estate solutions tailored to your needs.
+          Your perfect place is waiting.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn-primary">Explore Listings</button>
+          <button class="btn-outline">Learn More</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: IMAGE SLIDE ANIMATION -->
+      <div class="hero-visual">
+        <div class="hero-visual-strip">
+          <div class="hero-frame frame-1"></div>
+          <div class="hero-frame frame-2"></div>
+        </div>
+
+        <div class="hero-visual-badge">
+          PREMIUM PROPERTIES
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- JS: MOBILE NAV -->
   <script>
