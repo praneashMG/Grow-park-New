@@ -744,6 +744,509 @@
         letter-spacing: 0.2em;
       }
     }
+    /* -------------------------------------- */
+    /* ABOUT / TRUST SECTION – B&W + 3D       */
+    /* -------------------------------------- */
+
+    .about-section {
+      position: relative;
+      padding: 96px 16px 110px;
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 55%),
+        radial-gradient(circle at bottom, rgba(255, 255, 255, 0.05), #050505 60%);
+      overflow: hidden;
+    }
+
+    /* soft background glow */
+    .about-section::before,
+    .about-section::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.09), transparent 60%);
+      filter: blur(4px);
+      opacity: 0.8;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .about-section::before {
+      top: -140px;
+      left: -120px;
+    }
+
+    .about-section::after {
+      bottom: -150px;
+      right: -130px;
+    }
+
+    .about-inner {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 42px;
+      align-items: center;
+      z-index: 1;
+    }
+
+    /* -------------------------------------- */
+    /* LEFT: IMAGE COLLAGE                    */
+    /* -------------------------------------- */
+
+    .about-gallery {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      transform-style: preserve-3d;
+      perspective: 900px;
+    }
+
+    .gallery-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 26px 60px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.04);
+      transform-origin: center;
+      transform: translateY(0) rotateX(0deg) rotateY(0deg);
+      transition:
+        transform 0.4s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        filter 0.3s ease;
+      overflow-clip-margin: 24px;
+    }
+
+    /* stagger layout */
+    .gallery-card:nth-child(1) {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+      min-height: 260px;
+      transform: translateY(10px) rotateY(-6deg);
+    }
+
+    .gallery-card:nth-child(2) {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+      min-height: 160px;
+      transform: translateY(-14px) rotateX(5deg);
+    }
+
+    .gallery-card:nth-child(3) {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      min-height: 180px;
+      transform: translateY(16px) rotateY(5deg);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%);
+      transition: transform 0.4s ease, filter 0.4s ease, opacity 0.3s ease;
+    }
+
+    .gallery-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.15), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-6px) rotateX(3deg) rotateY(-3deg);
+      box-shadow:
+        0 36px 80px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.04);
+      filter: grayscale(0%);
+    }
+
+    /* small floating badge on collage */
+    .about-gallery::after {
+      content: "REAL ESTATE • INDIA";
+      position: absolute;
+      right: 6px;
+      top: 10px;
+      padding: 4px 12px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 1);
+      backdrop-filter: blur(6px);
+    }
+
+    /* -------------------------------------- */
+    /* RIGHT: TEXT CONTENT                    */
+    /* -------------------------------------- */
+
+    .about-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 14px;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 11px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #f5f5f5;
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), #050505);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
+    }
+
+    .about-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      border: 1px solid #ffffff;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+    }
+
+    .about-title {
+      font-size: clamp(26px, 3.2vw, 34px);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .about-title span {
+      display: inline-block;
+    }
+
+    .about-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #e5e5e5;
+      opacity: 0.92;
+      max-width: 520px;
+      margin-bottom: 26px;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 4px;
+    }
+
+    .feature-card {
+      position: relative;
+      padding: 18px 16px 18px;
+      border-radius: 18px;
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 18px 48px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.03);
+      overflow: hidden;
+      transform: translateY(0);
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease,
+        background 0.22s ease;
+    }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.14),
+        transparent 45%
+      );
+      opacity: 0.6;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 26px 60px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.24);
+      background: rgba(0, 0, 0, 0.96);
+    }
+
+    .feature-icon {
+      font-size: 20px;
+      margin-bottom: 10px;
+      filter: grayscale(100%);
+    }
+
+    .feature-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .feature-text {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #e5e5e5;
+      opacity: 0.9;
+    }
+
+    /* -------------------------------------- */
+    /* RESPONSIVE                            */
+    /* -------------------------------------- */
+
+    @media (max-width: 960px) {
+      .about-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .about-gallery {
+        max-width: 520px;
+        margin: 0 auto 32px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .about-section {
+        padding: 72px 16px 80px;
+      }
+
+      .about-inner {
+        gap: 32px;
+      }
+
+      .about-gallery {
+        gap: 14px;
+      }
+
+      .gallery-card:nth-child(1),
+      .gallery-card:nth-child(2),
+      .gallery-card:nth-child(3) {
+        transform: translateY(0);
+      }
+
+      .about-features {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .feature-card {
+        padding: 16px 14px 16px;
+      }
+    }
+    /* SERVICES – MARQUEE OLD THEME */
+.services-section {
+  position: relative;
+  padding: 54px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: #050505;
+  overflow: hidden;
+}
+
+/* thin label above marquee – retro ticker style */
+.services-label {
+  max-width: 1120px;
+  margin: 0 auto 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.16), #050505);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.9);
+}
+
+/* marquee outer */
+.services-marquee {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 12px 0;
+  /* vintage border frame */
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 1),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.8);
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.03) 0,
+      rgba(255, 255, 255, 0.03) 6px,
+      transparent 6px,
+      transparent 12px
+    ),
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.09), #050505);
+}
+
+/* subtle film grain overlay */
+.services-marquee::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: soft-light;
+}
+
+/* moving track */
+.services-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: servicesMarquee 18s linear infinite;
+}
+
+/* pause on hover */
+.services-marquee:hover .services-track {
+  animation-play-state: paused;
+}
+
+/* individual cards – old card style */
+.service-card {
+  min-width: 260px;
+  max-width: 260px;
+  padding: 18px 18px 16px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 1),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateY(0);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* inner border line – vintage frame */
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+/* highlight middle card slightly different */
+.service-card--highlight {
+  background: #050505;
+  border-color: #ffffff;
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 1),
+    0 0 0 1px rgba(255, 255, 255, 0.36);
+}
+
+.service-card--highlight::before {
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* hover effect */
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 1),
+    0 0 0 1px rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: #000000;
+}
+
+/* icon & typography – old vibe */
+.service-icon {
+  font-size: 22px;
+  margin-bottom: 10px;
+  filter: grayscale(100%);
+}
+
+.service-title {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.service-text {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #e5e5e5;
+  opacity: 0.9;
+}
+
+/* marquee animation */
+@keyframes servicesMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* responsive tweaks */
+@media (max-width: 640px) {
+  .services-section {
+    padding: 40px 0;
+  }
+
+  .services-marquee {
+    border-radius: 14px;
+  }
+
+  .service-card {
+    min-width: 220px;
+    max-width: 220px;
+    padding: 16px 14px 14px;
+  }
+
+  .services-label {
+    margin: 0 12px 10px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -817,6 +1320,119 @@
       </div>
     </div>
   </section>
+  <!-- TRUST / ABOUT SECTION -->
+  <section class="about-section">
+    <div class="about-inner">
+      <!-- Image collage -->
+      <div class="about-gallery">
+        <div class="gallery-card">
+          <img src="https://avatars.mds.yandex.net/get-altay/14221082/2a0000019387228f4b0bfa6668324f835c9f/XXL_height" alt="Modern home exterior">
+        </div>
+        <div class="gallery-card">
+          <img src="https://i2.wp.com/www.remodelingcalculator.org/wp-content/uploads/Home-Addition-Costs.jpg" alt="Contemporary villa">
+        </div>
+        <div class="gallery-card">
+          <img src="https://nnv.pgp.com.ru/wp-content/uploads/2019/01/per1-1200x800.jpg" alt="Luxury interior">
+        </div>
+      </div>
+
+      <!-- Text content -->
+      <div>
+        <div class="about-label">ZIGSON</div>
+        <h2 class="about-title">Driven by Trust, Powered by Innovation</h2>
+        <p class="about-text">
+          Zigson is a modern real estate company built on trust, technology, and transparency.
+          We specialize in helping people find their dream homes, sell properties at the best value,
+          and invest smartly in real estate across India. With a deep understanding of the market
+          and a passion for customer service, we guide you every step of the way.
+        </p>
+
+        <div class="about-features">
+          <div class="feature-card">
+            <div class="feature-icon">🏡</div>
+            <div class="feature-title">Transparent &amp; Trustworthy</div>
+            <div class="feature-text">
+              No hidden fees. No pushy sales. Just honest advice, smart strategies, and real results.
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🏛️</div>
+            <div class="feature-title">Client-First Culture</div>
+            <div class="feature-text">
+              You're not just a transaction to us. We're with you at every step of the deal.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- SERVICES SECTION – MARQUEE / OLD THEME -->
+<section class="services-section">
+  <div class="services-label">OUR SERVICES • ZIGSON</div>
+
+  <div class="services-marquee">
+    <div class="services-track">
+      <!-- Row 1 -->
+      <div class="service-card">
+        <div class="service-icon">🏡</div>
+        <h3 class="service-title">Sell Own Property</h3>
+        <p class="service-text">
+          We bring the right people together to challenge established thinking and drive
+          transform in 2020.
+        </p>
+      </div>
+
+      <div class="service-card service-card--highlight">
+        <div class="service-icon">🔑</div>
+        <h3 class="service-title">Buy A Property</h3>
+        <p class="service-text">
+          We bring the right people together to challenge established thinking and drive
+          transform in 2020.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🏗️</div>
+        <h3 class="service-title">Build Modern House</h3>
+        <p class="service-text">
+          We bring the right people together to challenge established thinking and drive
+          transform in 2020.
+        </p>
+      </div>
+
+      <!-- Row 2 (duplicate for seamless marquee) -->
+      <div class="service-card">
+        <div class="service-icon">🏡</div>
+        <h3 class="service-title">Sell Own Property</h3>
+        <p class="service-text">
+          We bring the right people together to challenge established thinking and drive
+          transform in 2020.
+        </p>
+      </div>
+
+      <div class="service-card service-card--highlight">
+        <div class="service-icon">🔑</div>
+        <h3 class="service-title">Buy A Property</h3>
+        <p class="service-text">
+          We bring the right people together to challenge established thinking and drive
+          transform in 2020.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🏗️</div>
+        <h3 class="service-title">Build Modern House</h3>
+        <p class="service-text">
+          We bring the right people together to challenge established thinking and drive
+          transform in 2020.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- JS: MOBILE NAV -->
   <script>
