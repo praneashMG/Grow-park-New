@@ -22,11 +22,6 @@
     a {
       text-decoration: none;
     }
-
-    /* --------------------------------------------- */
-    /* DESKTOP NAVBAR – BLACK & WHITE + 3D           */
-    /* --------------------------------------------- */
-
     .navbar-wrapper {
       position: fixed;
       inset: 0 0 auto 0;
@@ -186,10 +181,7 @@
         0 4px 10px rgba(0, 0, 0, 0.7);
     }
 
-    /* --------------------------------------------- */
-    /* MOBILE NAV / DRAWER                          */
-    /* --------------------------------------------- */
-
+    
     .nav-toggle {
       display: none;
       width: 40px;
@@ -370,16 +362,13 @@
       }
     }
 
-    /* -------------------------------------- */
-    /* FULL-PAGE SPLIT HERO                   */
-    /* -------------------------------------- */
-
+    
     .hero-split {
-      min-height: 100vh;           /* full screen height */
+      min-height: 100vh;           
       display: flex;
       align-items: stretch;
       justify-content: center;
-      padding: 110px 16px 60px;   /* space for fixed navbar + bottom */
+      padding: 110px 16px 60px;   
       background:
         radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 55%),
         radial-gradient(circle at bottom, rgba(255, 255, 255, 0.06), #050505 60%);
@@ -421,9 +410,6 @@
       align-items: stretch;
       z-index: 1;
     }
-
-    /* LEFT – TEXT */
-
     .hero-text {
       position: relative;
       padding: 32px 26px;
@@ -604,7 +590,6 @@
         0 0 0 rgba(0, 0, 0, 0.8);
     }
 
-    /* RIGHT – SLIDING IMAGES */
 
     .hero-visual {
       position: relative;
@@ -693,11 +678,6 @@
         transform: translateX(0%);
       }
     }
-
-    /* -------------------------------------- */
-    /* RESPONSIVE                             */
-    /* -------------------------------------- */
-
     @media (max-width: 900px) {
       .hero-split-inner {
         grid-template-columns: minmax(0, 1fr);
@@ -744,10 +724,6 @@
         letter-spacing: 0.2em;
       }
     }
-    /* -------------------------------------- */
-    /* ABOUT / TRUST SECTION – B&W + 3D       */
-    /* -------------------------------------- */
-
     .about-section {
       position: relative;
       padding: 96px 16px 110px;
@@ -756,8 +732,6 @@
         radial-gradient(circle at bottom, rgba(255, 255, 255, 0.05), #050505 60%);
       overflow: hidden;
     }
-
-    /* soft background glow */
     .about-section::before,
     .about-section::after {
       content: "";
@@ -792,10 +766,6 @@
       align-items: center;
       z-index: 1;
     }
-
-    /* -------------------------------------- */
-    /* LEFT: IMAGE COLLAGE                    */
-    /* -------------------------------------- */
 
     .about-gallery {
       position: relative;
@@ -895,10 +865,6 @@
       box-shadow: 0 10px 24px rgba(0, 0, 0, 1);
       backdrop-filter: blur(6px);
     }
-
-    /* -------------------------------------- */
-    /* RIGHT: TEXT CONTENT                    */
-    /* -------------------------------------- */
 
     .about-label {
       display: inline-flex;
@@ -1522,8 +1488,6 @@
   position: relative;
   overflow: hidden;
 }
-
-/* internal frame – old clipboard border */
 .why-panel::before {
   content: "";
   position: absolute;
