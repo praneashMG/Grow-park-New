@@ -1731,489 +1731,492 @@
   }
 }
  /* -------------------------------------- */
-    /* FEATURED LISTINGS – OLD THEME + FX     */
-    /* -------------------------------------- */
+/* FEATURED LISTINGS – RESPONSIVE OLD FX  */
+/* -------------------------------------- */
 
-    .featured-section {
-      position: relative;
-      padding: 80px 16px 90px;
-      background: #050505;
-      border-top: 1px solid rgba(255,255,255,0.15);
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-      overflow: hidden;
-    }
+.featured-section {
+  position: relative;
+  padding: 80px 16px 90px;
+  background: #050505;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  overflow: hidden;
+}
 
-    /* subtle glow behind listings */
-    .featured-section::before {
-      content: "";
-      position: absolute;
-      width: 520px;
-      height: 520px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 65%);
-      top: -220px;
-      left: -160px;
-      opacity: 0.75;
-      filter: blur(8px);
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
+.featured-section::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 65%);
+  top: -220px;
+  left: -160px;
+  opacity: 0.75;
+  filter: blur(8px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
 
-    .featured-inner {
-      position: relative;
-      max-width: 1120px;
-      margin: 0 auto;
-      z-index: 1;
-    }
+.featured-inner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  z-index: 1;
+}
 
-    .featured-header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
+.featured-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
 
-    .featured-title {
-      font-size: clamp(24px, 3vw, 32px);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      margin-bottom: 10px;
-    }
+.featured-title {
+  font-size: clamp(22px, 3vw, 30px);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 10px;
+}
 
-    .featured-underline {
-      display: inline-block;
-      width: 120px;
-      height: 2px;
-      background: #ffffff;
-      position: relative;
-      overflow: hidden;
-    }
+.featured-underline {
+  display: inline-block;
+  width: 120px;
+  height: 2px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
 
-    /* shimmer animation on underline */
-    .featured-underline::before {
-      content: "";
-      position: absolute;
-      left: -100%;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.8),
-        transparent
-      );
-      animation: underlineShine 2.4s infinite;
-    }
+.featured-underline::before {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.8),
+    transparent
+  );
+  animation: underlineShine 2.4s infinite;
+}
 
-    @keyframes underlineShine {
-      0%   { left: -100%; }
-      50%  { left: 100%; }
-      100% { left: 100%; }
-    }
+@keyframes underlineShine {
+  0%   { left: -100%; }
+  50%  { left: 100%; }
+  100% { left: 100%; }
+}
 
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
+/* Responsive grid: 3 → 2 → 1 */
+.featured-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 
-    .listing-card {
-      position: relative;
-      border-radius: 18px;
-      background: #000000;
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow:
-        0 20px 45px rgba(0,0,0,1),
-        0 0 0 1px rgba(255,255,255,0.05);
-      overflow: hidden;
-      transform: translateY(20px);
-      opacity: 0;
-      animation: cardFadeUp 0.9s ease-out forwards;
-    }
+@media (max-width: 900px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
-    /* staggered entrance */
-    .listing-card:nth-child(1) { animation-delay: 0.1s; }
-    .listing-card:nth-child(2) { animation-delay: 0.25s; }
-    .listing-card:nth-child(3) { animation-delay: 0.4s; }
+@media (max-width: 640px) {
+  .featured-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 
-    @keyframes cardFadeUp {
-      0%   { opacity: 0; transform: translateY(24px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+/* Cards */
 
-    /* inner frame line – old print style */
-    .listing-card::before {
-      content: "";
-      position: absolute;
-      inset: 8px;
-      border-radius: 12px;
-      border: 1px dashed rgba(255,255,255,0.16);
-      pointer-events: none;
-    }
+.listing-card {
+  position: relative;
+  border-radius: 18px;
+  background: #000000;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    0 20px 45px rgba(0,0,0,1),
+    0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: cardFadeUp 0.9s ease-out forwards;
+}
 
-    .listing-media {
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-    }
+.listing-card:nth-child(1) { animation-delay: 0.1s; }
+.listing-card:nth-child(2) { animation-delay: 0.25s; }
+.listing-card:nth-child(3) { animation-delay: 0.4s; }
 
-    .listing-media img {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      display: block;
-      filter: grayscale(100%);
-      transform: scale(1.03);
-      transition: transform 0.45s ease, filter 0.45s ease, opacity 0.3s ease;
-    }
+@keyframes cardFadeUp {
+  0%   { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
 
-    /* faux “old photo” overlay */
-    .listing-media::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top, rgba(255,255,255,0.18), transparent 55%);
-      mix-blend-mode: soft-light;
-      pointer-events: none;
-    }
+.listing-card::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 12px;
+  border: 1px dashed rgba(255,255,255,0.16);
+  pointer-events: none;
+}
 
-    .listing-pill {
-      position: absolute;
-      left: 14px;
-      bottom: 12px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      background: rgba(0,0,0,0.82);
-      border: 1px solid rgba(255,255,255,0.4);
-      color: #ffffff;
-      box-shadow: 0 10px 18px rgba(0,0,0,1);
-    }
+.listing-media {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
 
-    .listing-body {
-      padding: 16px 16px 18px;
-    }
+.listing-media img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%);
+  transform: scale(1.03);
+  transition: transform 0.45s ease, filter 0.45s ease, opacity 0.3s ease;
+}
 
-    .location-dot {
-      margin-right: 4px;
-    }
+@media (max-width: 640px) {
+  .listing-media img {
+    height: 210px;
+  }
+}
 
-    .listing-location {
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #e5e5e5;
-      margin-bottom: 6px;
-    }
+.listing-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.18), transparent 55%);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
 
-    .listing-title {
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 6px;
-    }
+.listing-pill {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.82);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #ffffff;
+  box-shadow: 0 10px 18px rgba(0,0,0,1);
+}
 
-    .listing-text {
-      font-size: 13px;
-      color: #d4d4d4;
-      margin-bottom: 14px;
-    }
+.listing-body {
+  padding: 16px 16px 18px;
+}
 
-    .listing-btn {
-      border: none;
-      padding: 9px 18px;
-      border-radius: 999px;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      background: #ffffff;
-      color: #000000;
-      cursor: pointer;
-      box-shadow:
-        0 9px 0 #cfcfcf,
-        0 18px 26px rgba(0,0,0,1);
-      transition: 0.25s ease;
-    }
+.location-dot {
+  margin-right: 4px;
+}
 
-    .listing-btn:hover {
-      transform: translateY(3px);
-      box-shadow:
-        0 4px 0 #cfcfcf,
-        0 10px 14px rgba(0,0,0,1);
-    }
+.listing-location {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #e5e5e5;
+  margin-bottom: 6px;
+}
 
-    .listing-btn:active {
-      transform: translateY(6px);
-      box-shadow:
-        0 0 0 #cfcfcf,
-        0 6px 10px rgba(0,0,0,1);
-    }
+.listing-title {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
 
-    /* HOVER EFFECT – zoom/ungreyscale */
-    .listing-card:hover .listing-media img {
-      transform: scale(1.08);
-      filter: grayscale(0%);
-    }
+.listing-text {
+  font-size: 13px;
+  color: #d4d4d4;
+  margin-bottom: 14px;
+}
 
-    .featured-footer {
-      margin-top: 26px;
-      text-align: center;
-    }
+.listing-btn {
+  border: none;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  box-shadow:
+    0 9px 0 #cfcfcf,
+    0 18px 26px rgba(0,0,0,1);
+  transition: 0.25s ease;
+}
 
-    .featured-btn-all {
-      padding: 11px 26px;
-      border-radius: 999px;
-      border: 1px solid #ffffff;
-      background: transparent;
-      color: #ffffff;
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: 0 0 0 rgba(0,0,0,0);
-      transition: 0.25s ease;
-    }
+.listing-btn:hover {
+  transform: translateY(3px);
+  box-shadow:
+    0 4px 0 #cfcfcf,
+    0 10px 14px rgba(0,0,0,1);
+}
 
-    .featured-btn-all:hover {
-      background: #ffffff;
-      color: #000000;
-      box-shadow: 0 14px 30px rgba(0,0,0,1);
-      transform: translateY(-2px);
-    }
+.listing-btn:active {
+  transform: translateY(6px);
+  box-shadow:
+    0 0 0 #cfcfcf,
+    0 6px 10px rgba(0,0,0,1);
+}
 
-    @media (max-width: 900px) {
-      .featured-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
+.listing-card:hover .listing-media img {
+  transform: scale(1.08);
+  filter: grayscale(0%);
+}
 
-    @media (max-width: 640px) {
-      .featured-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
+.featured-footer {
+  margin-top: 26px;
+  text-align: center;
+}
 
-      .listing-media img {
-        height: 200px;
-      }
-    }
+.featured-btn-all {
+  padding: 11px 26px;
+  border-radius: 999px;
+  border: 1px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
 
-    /* -------------------------------------- */
-    /* WHY CHOICE US – OLD THEME + FX         */
-    /* -------------------------------------- */
+.featured-btn-all:hover {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 14px 30px rgba(0,0,0,1);
+  transform: translateY(-2px);
+}
 
-    .why-modern {
-      position: relative;
-      padding: 90px 16px 100px;
-      background: #050505;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      overflow: hidden;
-    }
+/* -------------------------------------- */
+/* WHY CHOICE US – RESPONSIVE OLD FX      */
+/* -------------------------------------- */
 
-    .why-modern::before {
-      content: "";
-      position: absolute;
-      width: 460px;
-      height: 460px;
-      border-radius: 50%;
-      top: -200px;
-      right: -160px;
-      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
-      filter: blur(8px);
-      opacity: 0.8;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
+.why-modern {
+  position: relative;
+  padding: 90px 16px 100px;
+  background: #050505;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  overflow: hidden;
+}
 
-    .why-modern-inner {
-      position: relative;
-      max-width: 1120px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 40px;
-      z-index: 1;
-    }
+.why-modern::before {
+  content: "";
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  border-radius: 50%;
+  top: -200px;
+  right: -160px;
+  background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
+  filter: blur(8px);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
 
-    .why-left-heading {
-      margin-bottom: 20px;
-    }
+.why-modern-inner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+  gap: 40px;
+  z-index: 1;
+}
 
-    .why-modern .why-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: #f5f5f5;
-      margin-bottom: 10px;
-    }
+@media (max-width: 900px) {
+  .why-modern-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+}
 
-    .why-modern .why-title {
-      font-size: clamp(22px, 2.8vw, 30px);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
+.why-left-heading {
+  margin-bottom: 20px;
+}
 
-    .why-modern .service-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 22px;
-    }
+.why-modern .why-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #f5f5f5;
+  margin-bottom: 10px;
+}
 
-    .why-modern .service-card {
-      position: relative;
-      padding: 16px 14px;
-      border-radius: 16px;
-      background: #000000;
-      border: 1px solid rgba(255,255,255,0.16);
-      box-shadow:
-        0 18px 40px rgba(0,0,0,1),
-        0 0 0 1px rgba(255,255,255,0.05);
-      overflow: hidden;
-      transform: translateY(18px);
-      opacity: 0;
-      animation: serviceFadeUp 0.9s ease-out forwards;
-    }
+.why-modern .why-title {
+  font-size: clamp(20px, 2.6vw, 28px);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
 
-    .why-modern .service-card:nth-child(1) { animation-delay: 0.15s; }
-    .why-modern .service-card:nth-child(2) { animation-delay: 0.3s; }
-    .why-modern .service-card:nth-child(3) { animation-delay: 0.45s; }
-    .why-modern .service-card:nth-child(4) { animation-delay: 0.6s; }
+/* service grid responsive */
 
-    @keyframes serviceFadeUp {
-      0%   { opacity: 0; transform: translateY(22px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+.why-modern .service-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 22px;
+}
 
-    .why-modern .service-card::before {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border-radius: 10px;
-      border: 1px dashed rgba(255,255,255,0.16);
-      pointer-events: none;
-    }
+@media (max-width: 720px) {
+  .why-modern .service-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 
-    .why-modern .service-icon {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
+/* service cards */
 
-    .why-modern .service-title {
-      font-size: 13px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
+.why-modern .service-card {
+  position: relative;
+  padding: 16px 14px;
+  border-radius: 16px;
+  background: #000000;
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,1),
+    0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+  transform: translateY(18px);
+  opacity: 0;
+  animation: serviceFadeUp 0.9s ease-out forwards;
+}
 
-    .why-modern .service-text {
-      font-size: 13px;
-      color: #e5e5e5;
-      line-height: 1.7;
-    }
+.why-modern .service-card:nth-child(1) { animation-delay: 0.15s; }
+.why-modern .service-card:nth-child(2) { animation-delay: 0.3s; }
+.why-modern .service-card:nth-child(3) { animation-delay: 0.45s; }
+.why-modern .service-card:nth-child(4) { animation-delay: 0.6s; }
 
-    .why-modern .trust-eyebrow {
-      font-size: 10px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      color: #f5f5f5;
-    }
+@keyframes serviceFadeUp {
+  0%   { opacity: 0; transform: translateY(22px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
 
-    .why-modern .trust-title {
-      font-size: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 10px;
-    }
+.why-modern .service-card::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 10px;
+  border: 1px dashed rgba(255,255,255,0.16);
+  pointer-events: none;
+}
 
-    .why-modern .trust-title span {
-      border-bottom: 1px solid #ffffff;
-    }
+.why-modern .service-icon {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
 
-    .why-modern .trust-text {
-      font-size: 13px;
-      line-height: 1.8;
-      color: #e5e5e5;
-      margin-bottom: 14px;
-    }
+.why-modern .service-title {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
 
-    .trust-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-    }
+.why-modern .service-text {
+  font-size: 13px;
+  color: #e5e5e5;
+  line-height: 1.7;
+}
 
-    .trust-tag {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.4);
-      background: rgba(0,0,0,0.8);
-    }
+/* RIGHT text & image */
 
-    .why-right-bottom {
-      margin-top: 20px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow:
-        0 20px 50px rgba(0,0,0,1),
-        0 0 0 1px rgba(255,255,255,0.05);
-      position: relative;
-    }
+.why-modern .trust-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: #f5f5f5;
+}
 
-    .why-right-bottom img {
-      width: 100%;
-      height: 230px;
-      object-fit: cover;
-      display: block;
-      filter: grayscale(100%);
-      transform-origin: center;
-      animation: kenBurns 18s ease-in-out infinite;
-    }
+.why-modern .trust-title {
+  font-size: clamp(18px, 2.4vw, 22px);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
 
-    .why-right-bottom::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top, rgba(255,255,255,0.16), transparent 55%),
-        linear-gradient(to bottom, rgba(0,0,0,0.15), transparent 40%, rgba(0,0,0,0.3));
-      mix-blend-mode: soft-light;
-      pointer-events: none;
-    }
+.why-modern .trust-title span {
+  border-bottom: 1px solid #ffffff;
+}
 
-    @keyframes kenBurns {
-      0%   { transform: scale(1.05) translate(0, 0); }
-      50%  { transform: scale(1.12) translate(-6px, -6px); }
-      100% { transform: scale(1.05) translate(0, 0); }
-    }
+.why-modern .trust-text {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #e5e5e5;
+  margin-bottom: 14px;
+}
 
-    @media (max-width: 900px) {
-      .why-modern-inner {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 32px;
-      }
+.trust-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
 
-      .why-right-bottom img {
-        height: 260px;
-      }
-    }
+.trust-tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(0,0,0,0.8);
+}
 
-    @media (max-width: 640px) {
-      .why-modern {
-        padding: 70px 16px 80px;
-      }
+.why-right-bottom {
+  margin-top: 20px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    0 20px 50px rgba(0,0,0,1),
+    0 0 0 1px rgba(255,255,255,0.05);
+  position: relative;
+}
 
-      .why-modern .service-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
+.why-right-bottom img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%);
+  transform-origin: center;
+  animation: kenBurns 18s ease-in-out infinite;
+}
+
+@media (max-width: 640px) {
+  .why-right-bottom img {
+    height: 260px;
+  }
+}
+
+.why-right-bottom::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.16), transparent 55%),
+    linear-gradient(to bottom, rgba(0,0,0,0.15), transparent 40%, rgba(0,0,0,0.3));
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+@keyframes kenBurns {
+  0%   { transform: scale(1.05) translate(0, 0); }
+  50%  { transform: scale(1.12) translate(-6px, -6px); }
+  100% { transform: scale(1.05) translate(0, 0); }
+}
+
   </style>
 </head>
 <body>
@@ -2491,145 +2494,156 @@
   </div>
 </section>
 <!-- FEATURED LISTINGS -->
-  <section class="featured-section">
-    <div class="featured-inner">
+<section class="featured-section">
+  <div class="featured-inner">
 
-      <div class="featured-header">
-        <h2 class="featured-title">Featured Listings</h2>
-        <div class="featured-underline"></div>
-      </div>
-
-      <div class="featured-grid">
-        <!-- CARD 1 -->
-        <article class="listing-card">
-          <div class="listing-media">
-            <img src="https://avatars.mds.yandex.net/i?id=c1a90fdefc4d1f172c9aed344a253c8cfe6a0bf6-12593867-images-thumbs&n=13" alt="The California">
-            <span class="listing-pill">25+ Listing</span>
-          </div>
-          <div class="listing-body">
-            <p class="listing-location">
-              <span class="location-dot">📍</span> California
-            </p>
-            <h3 class="listing-title">The California</h3>
-            <p class="listing-text">
-              For pricing information, please reach out directly
-            </p>
-            <button class="listing-btn">VIEW LISTING</button>
-          </div>
-        </article>
-
-        <!-- CARD 2 -->
-        <article class="listing-card">
-          <div class="listing-media">
-            <img src="https://img.freepik.com/free-photo/3d-rendering-house-model_23-2150799745.jpg?semt=ais_hybrid&w=740" alt="Merch Perch">
-            <span class="listing-pill">25+ Listing</span>
-          </div>
-          <div class="listing-body">
-            <p class="listing-location">
-              <span class="location-dot">📍</span> Los Angeles
-            </p>
-            <h3 class="listing-title">Merch Perch</h3>
-            <p class="listing-text">
-              For pricing information, please reach out directly
-            </p>
-            <button class="listing-btn">VIEW LISTING</button>
-          </div>
-        </article>
-
-        <!-- CARD 3 -->
-        <article class="listing-card">
-          <div class="listing-media">
-            <img src="https://avatars.mds.yandex.net/i?id=ce8eab5d0a0b9026694b9fd9a68a5a35087c9d5d-5869255-images-thumbs&n=13" alt="Tourist Nations">
-            <span class="listing-pill">25+ Listing</span>
-          </div>
-          <div class="listing-body">
-            <p class="listing-location">
-              <span class="location-dot">📍</span> Amsterdam
-            </p>
-            <h3 class="listing-title">Tourist Nations</h3>
-            <p class="listing-text">
-              For pricing information, please reach out directly
-            </p>
-            <button class="listing-btn">VIEW LISTING</button>
-          </div>
-        </article>
-      </div>
-
-      <div class="featured-footer">
-        <button class="featured-btn-all" id="viewAllBtn">VIEW ALL LISTINGS</button>
-      </div>
+    <div class="featured-header">
+      <h2 class="featured-title">Featured Listings</h2>
+      <div class="featured-underline"></div>
     </div>
-  </section>
 
-  <!-- WHY CHOICE US SECTION -->
-  <section class="why-modern">
-    <div class="why-modern-inner">
-      <!-- LEFT AREA -->
-      <div>
-        <div class="why-left-heading">
-          <p class="why-eyebrow">WHY CHOICE US</p>
-          <h2 class="why-title">Why You Must Choice Our Modern House Services</h2>
+    <div class="featured-grid">
+      <!-- CARD 1 -->
+      <article class="listing-card">
+        <div class="listing-media">
+          <img src="https://avatars.mds.yandex.net/i?id=c1a90fdefc4d1f172c9aed344a253c8cfe6a0bf6-12593867-images-thumbs&n=13" alt="The California">
+          <span class="listing-pill">25+ Listing</span>
         </div>
-
-        <div class="service-grid">
-          <div class="service-card">
-            <div class="service-icon">🏡</div>
-            <h3 class="service-title">Trusted Expertise</h3>
-            <p class="service-text">
-              Years of experience in residential, commercial, and investment real estate.
-            </p>
-          </div>
-
-          <div class="service-card">
-            <div class="service-icon">🏛️</div>
-            <h3 class="service-title">Client-First Approach</h3>
-            <p class="service-text">
-              We focus on your goals, not just transactions.
-            </p>
-          </div>
-
-          <div class="service-card">
-            <div class="service-icon">🌐</div>
-            <h3 class="service-title">Wide Network</h3>
-            <p class="service-text">
-              Strong presence across major cities with access to exclusive listings.
-            </p>
-          </div>
-
-          <div class="service-card">
-            <div class="service-icon">⚙️</div>
-            <h3 class="service-title">Tech-Driven Solutions</h3>
-            <p class="service-text">
-              Virtual tours, smart property matches, and digital support.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT AREA -->
-      <div>
-        <div class="why-right-top">
-          <p class="trust-eyebrow">WE HAVE TRUST BUSINESS</p>
-          <h3 class="trust-title">We Have Trust By <span>250+ More</span> People</h3>
-          <p class="trust-text">
-            At Zigson, we believe real estate is more than just buying and selling — it's
-            about building trust and creating value. Our team blends local expertise with
-            advanced technology to deliver seamless property solutions tailored to your needs.
+        <div class="listing-body">
+          <p class="listing-location">
+            <span class="location-dot">📍</span> California
           </p>
+          <h3 class="listing-title">The California</h3>
+          <p class="listing-text">
+            For pricing information, please reach out directly
+          </p>
+          <button class="listing-btn">VIEW LISTING</button>
+        </div>
+      </article>
 
-          <div class="trust-tags">
-            <div class="trust-tag">Professional</div>
-            <div class="trust-tag">Years Of Experience</div>
-            <div class="trust-tag">Trusted Many People</div>
-          </div>
+      <!-- CARD 2 -->
+      <article class="listing-card">
+        <div class="listing-media">
+          <img src="https://img.freepik.com/free-photo/3d-rendering-house-model_23-2150799745.jpg?semt=ais_hybrid&w=740" alt="Merch Perch">
+          <span class="listing-pill">25+ Listing</span>
+        </div>
+        <div class="listing-body">
+          <p class="listing-location">
+            <span class="location-dot">📍</span> Los Angeles
+          </p>
+          <h3 class="listing-title">Merch Perch</h3>
+          <p class="listing-text">
+            For pricing information, please reach out directly
+          </p>
+          <button class="listing-btn">VIEW LISTING</button>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="listing-card">
+        <div class="listing-media">
+          <img src="https://avatars.mds.yandex.net/i?id=ce8eab5d0a0b9026694b9fd9a68a5a35087c9d5d-5869255-images-thumbs&n=13" alt="Tourist Nations">
+          <span class="listing-pill">25+ Listing</span>
+        </div>
+        <div class="listing-body">
+          <p class="listing-location">
+            <span class="location-dot">📍</span> Amsterdam
+          </p>
+          <h3 class="listing-title">Tourist Nations</h3>
+          <p class="listing-text">
+            For pricing information, please reach out directly
+          </p>
+          <button class="listing-btn">VIEW LISTING</button>
+        </div>
+      </article>
+    </div>
+
+    <div class="featured-footer">
+      <button class="featured-btn-all" id="viewAllBtn">VIEW ALL LISTINGS</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY CHOICE US SECTION -->
+<section class="why-modern">
+  <div class="why-modern-inner">
+    <!-- LEFT AREA -->
+    <div>
+      <div class="why-left-heading">
+        <p class="why-eyebrow">WHY CHOICE US</p>
+        <h2 class="why-title">Why You Must Choice Our Modern House Services</h2>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="service-icon">🏡</div>
+          <h3 class="service-title">Trusted Expertise</h3>
+          <p class="service-text">
+            Years of experience in residential, commercial, and investment real estate.
+          </p>
         </div>
 
-        <div class="why-right-bottom">
-          <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1200&q=80" alt="Colorful houses row" />
+        <div class="service-card">
+          <div class="service-icon">🏛️</div>
+          <h3 class="service-title">Client-First Approach</h3>
+          <p class="service-text">
+            We focus on your goals, not just transactions.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🌐</div>
+          <h3 class="service-title">Wide Network</h3>
+          <p class="service-text">
+            Strong presence across major cities with access to exclusive listings.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">⚙️</div>
+          <h3 class="service-title">Tech-Driven Solutions</h3>
+          <p class="service-text">
+            Virtual tours, smart property matches, and digital support.
+          </p>
         </div>
       </div>
     </div>
-  </section>
+
+    <!-- RIGHT AREA -->
+    <div>
+      <div class="why-right-top">
+        <p class="trust-eyebrow">WE HAVE TRUST BUSINESS</p>
+        <h3 class="trust-title">We Have Trust By <span>250+ More</span> People</h3>
+        <p class="trust-text">
+          At Zigson, we believe real estate is more than just buying and selling — it's
+          about building trust and creating value. Our team blends local expertise with
+          advanced technology to deliver seamless property solutions tailored to your needs.
+        </p>
+
+        <div class="trust-tags">
+          <div class="trust-tag">Professional</div>
+          <div class="trust-tag">Years Of Experience</div>
+          <div class="trust-tag">Trusted Many People</div>
+        </div>
+      </div>
+
+      <div class="why-right-bottom">
+        <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1200&q=80" alt="Colorful houses row" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const viewAllBtn = document.getElementById('viewAllBtn');
+  if (viewAllBtn) {
+    viewAllBtn.addEventListener('click', () => {
+      window.location.href = 'feature-listings.html';
+    });
+  }
+</script>
+
 
   <!-- JS: MOBILE NAV -->
   <script>
