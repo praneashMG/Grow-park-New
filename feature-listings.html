@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ZIGSON – Feature Listings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    /* ========== RESET & BASE ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #050505;
+      color: #f5f5f5;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ========== NAVBAR – OLD B&W PILL STYLE ========== */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 60;
+      pointer-events: none;
+    }
+
+    .nav-shell {
+      pointer-events: auto;
+      width: min(1120px, 100% - 24px);
+      height: 60px;
+      border-radius: 999px;
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow:
+        0 22px 50px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .nav-shell:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 30px 70px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.12);
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand {
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #ffffff;
+      position: relative;
+    }
+
+    .brand::before {
+      content: "ZIGSON";
+      position: absolute;
+      left: 1px;
+      top: 1px;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      position: relative;
+      color: #f5f5f5;
+      padding-bottom: 4px;
+      opacity: 0.8;
+      transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: #ffffff;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+      transform-origin: left;
+      transform: skewX(-10deg);
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .nav-links a.active {
+      color: #ffffff;
+    }
+
+    .nav-cta {
+      position: relative;
+      z-index: 1;
+      padding: 9px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: #ffffff;
+      color: #000000;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      box-shadow:
+        0 8px 0 #d4d4d4,
+        0 18px 30px rgba(0, 0, 0, 1);
+      transform: translateY(0);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(2px);
+      box-shadow:
+        0 4px 0 #d4d4d4,
+        0 10px 16px rgba(0, 0, 0, 1);
+      background: #f3f3f3;
+    }
+
+    .nav-cta:active {
+      transform: translateY(5px);
+      box-shadow:
+        0 0 0 #d4d4d4,
+        0 6px 10px rgba(0, 0, 0, 1);
+    }
+
+    /* Mobile toggle */
+    .nav-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      background: #000000;
+      padding: 8px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow:
+        0 8px 0 #111111,
+        0 16px 22px rgba(0, 0, 0, 0.9);
+      z-index: 61;
+    }
+
+    .nav-toggle span {
+      width: 20px;
+      height: 2px;
+      background: #ffffff;
+      border-radius: 999px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    body.nav-open .nav-toggle span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    body.nav-open .nav-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    body.nav-open .nav-toggle span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .mobile-nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 55;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -280px;
+      width: 260px;
+      height: 100vh;
+      background: #000000;
+      color: #ffffff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: transform 0.28s ease;
+      z-index: 56;
+      box-shadow: -22px 0 50px rgba(0, 0, 0, 1);
+    }
+
+    body.nav-open .mobile-nav {
+      transform: translateX(-280px);
+    }
+
+    body.nav-open .mobile-nav-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .mobile-nav-header .brand {
+      font-size: 16px;
+      letter-spacing: 0.18em;
+    }
+
+    .mobile-close {
+      border: none;
+      background: transparent;
+      color: #ffffff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      padding: 12px 0;
+      border-top: 1px solid #333333;
+      border-bottom: 1px solid #333333;
+    }
+
+    .mobile-nav-links li {
+      margin-bottom: 4px;
+    }
+
+    .mobile-nav-links a {
+      display: block;
+      padding: 10px 4px;
+      color: #e5e5e5;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border-radius: 8px;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    }
+
+    .mobile-nav-links a:hover,
+    .mobile-nav-links a.active {
+      background: #111111;
+      color: #ffffff;
+      transform: translateX(4px);
+    }
+
+    .mobile-nav-cta {
+      margin-top: 10px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: #ffffff;
+      color: #000000;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow:
+        0 10px 0 #d4d4d4,
+        0 22px 30px rgba(0, 0, 0, 1);
+      transition: 0.25s ease;
+    }
+
+    .mobile-nav-cta:hover {
+      transform: translateY(2px);
+      box-shadow:
+        0 4px 0 #d4d4d4,
+        0 14px 20px rgba(0, 0, 0, 1);
+    }
+
+    /* ========== HERO – MONOCHROME GLASS PANEL ========== */
+
+    .hero {
+      position: relative;
+      margin-top: 80px;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 16px;
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%);
+      transform: scale(1.06);
+      animation: heroZoom 26s ease-in-out infinite alternate;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.18), transparent 55%),
+        linear-gradient(115deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75));
+      z-index: -1;
+    }
+
+    @keyframes heroZoom {
+      0% { transform: scale(1.06) translateX(0); }
+      100% { transform: scale(1.12) translateX(-20px); }
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-panel {
+      background: rgba(0, 0, 0, 0.88);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      border-radius: 24px;
+      padding: 34px 28px 30px;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.9s ease-out both;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #d4d4d4;
+      margin-bottom: 10px;
+      opacity: 0.85;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4.6vw, 44px);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hero-subline {
+      font-size: 14px;
+      color: #e5e5e5;
+      line-height: 1.8;
+      margin-bottom: 24px;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .hero-subline::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      border-radius: 999px;
+      background: #ffffff;
+      opacity: 0.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-outline {
+      min-width: 150px;
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      transition: background 0.2s ease, color 0.2s ease,
+                  transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: #000000;
+      box-shadow:
+        0 10px 0 #d4d4d4,
+        0 24px 40px rgba(0, 0, 0, 1);
+    }
+
+    .btn-primary:hover {
+      background: #f3f3f3;
+      transform: translateY(2px);
+      box-shadow:
+        0 5px 0 #d4d4d4,
+        0 16px 26px rgba(0, 0, 0, 1);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #f5f5f5;
+      border-style: dashed;
+      box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.8);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(2px);
+    }
+
+    /* Right hero side – retro grid frame */
+    .hero-right {
+      position: relative;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      min-height: 220px;
+      overflow: hidden;
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 1);
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 55%);
+    }
+
+    .hero-right::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 18px;
+      background-image: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0.06) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.06) 1px,
+          transparent 1px
+        );
+      background-size: 26px 26px;
+      opacity: 0.5;
+      mix-blend-mode: soft-light;
+      animation: gridDrift 18s linear infinite;
+    }
+
+    .hero-right-label {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      background: #000000;
+      border-radius: 999px;
+      padding: 5px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .hero-right-tag {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 999px;
+      padding: 6px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    @keyframes gridDrift {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-10px, 6px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* ========== FEATURED HEADING ========== */
+
+    .featured-wrapper {
+      padding: 60px 16px 26px;
+      background: #050505;
+    }
+
+    .featured-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      text-align: left;
+      animation: fadeUp 0.8s ease-out both;
+    }
+
+    .featured-title {
+      font-size: 24px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .featured-subtitle {
+      font-size: 13px;
+      color: #d4d4d4;
+      max-width: 420px;
+    }
+
+    .featured-underline {
+      margin-top: 14px;
+      width: 80px;
+      height: 2px;
+      background: #ffffff;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+    }
+
+    /* ========== PROPERTY LISTINGS – TICKET STYLE ========== */
+
+    .properties {
+      max-width: 1120px;
+      margin: 0 auto 70px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      padding: 0 16px 40px;
+    }
+
+    .property-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
+      gap: 24px;
+      background: #000000;
+      border-radius: 22px;
+      padding: 20px 20px 18px;
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      opacity: 0;
+      transform: translateY(28px);
+      animation: fadeUp 0.9s ease-out forwards;
+    }
+
+    .property-card:nth-child(1) { animation-delay: 0.08s; }
+    .property-card:nth-child(2) { animation-delay: 0.16s; }
+    .property-card:nth-child(3) { animation-delay: 0.24s; }
+    .property-card:nth-child(4) { animation-delay: 0.32s; }
+    .property-card:nth-child(5) { animation-delay: 0.40s; }
+    .property-card:nth-child(6) { animation-delay: 0.48s; }
+
+    .property-card::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border-radius: 16px;
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      pointer-events: none;
+    }
+
+    .property-card::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.22), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      z-index: -1;
+    }
+
+    .property-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.16);
+    }
+
+    .property-card:hover::after {
+      opacity: 0.5;
+    }
+
+    .property-card.is-reverse {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+    }
+
+    .property-card.is-reverse .property-media {
+      order: 2;
+    }
+
+    .property-card.is-reverse .property-info {
+      order: 1;
+    }
+
+    .property-media {
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+    }
+
+    .property-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transform: scale(1.04);
+      transition: transform 0.7s ease;
+    }
+
+    .property-card:hover .property-media img {
+      transform: scale(1.1);
+    }
+
+    .property-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4px 4px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .property-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .property-desc {
+      font-size: 13px;
+      color: #d4d4d4;
+      line-height: 1.7;
+      margin-bottom: 14px;
+      max-width: 520px;
+    }
+
+    .property-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 26px;
+      margin-bottom: 12px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #9ca3af;
+    }
+
+    .meta-label {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .meta-value {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .property-features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+      margin-bottom: 18px;
+      font-size: 12px;
+      color: #e5e5e5;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .feature-item::before {
+      content: "◆";
+      font-size: 8px;
+      color: #ffffff;
+      opacity: 0.8;
+    }
+
+    .property-price {
+      font-size: 18px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .btn-details {
+      align-self: flex-start;
+      padding: 9px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: #ffffff;
+      color: #000000;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      cursor: pointer;
+      box-shadow:
+        0 10px 0 #d4d4d4,
+        0 20px 32px rgba(0, 0, 0, 1);
+      transition: background 0.25s ease,
+                  transform 0.2s ease,
+                  box-shadow 0.25s ease,
+                  color 0.25s ease;
+    }
+
+    .btn-details:hover {
+      background: #f3f3f3;
+      transform: translateY(2px);
+      box-shadow:
+        0 5px 0 #d4d4d4,
+        0 14px 22px rgba(0, 0, 0, 1);
+    }
+
+    /* ========== CTA STRIP – B&W BAND ========== */
+
+    .cta-strip {
+      background: #000000;
+      color: #ffffff;
+      text-align: center;
+      padding: 70px 16px 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-strip::before,
+    .cta-strip::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(42px);
+      opacity: 0.4;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 60%);
+    }
+
+    .cta-strip::before {
+      width: 260px;
+      height: 260px;
+      top: -80px;
+      left: 9%;
+    }
+
+    .cta-strip::after {
+      width: 220px;
+      height: 220px;
+      bottom: -80px;
+      right: 9%;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      animation: fadeUp 0.9s ease-out both;
+    }
+
+    .cta-title {
+      font-size: clamp(26px, 4vw, 34px);
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .cta-subtitle {
+      font-size: 13px;
+      color: #d4d4d4;
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 30px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #000000;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      box-shadow:
+        0 10px 0 #d4d4d4,
+        0 22px 36px rgba(0, 0, 0, 1);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+    }
+
+    .cta-button::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0));
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(2px);
+      background: #f3f3f3;
+      color: #000000;
+      box-shadow:
+        0 5px 0 #d4d4d4,
+        0 16px 24px rgba(0, 0, 0, 1);
+    }
+
+    .cta-button:hover::after {
+      transform: translateX(100%);
+    }
+
+    /* ========== TESTIMONIALS – POLAROID CARDS ========== */
+
+    .testimonials-section {
+      padding: 70px 16px 80px;
+      background: #050505;
+      position: relative;
+    }
+
+    .testimonials-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .testimonials-title {
+      font-size: clamp(26px, 4vw, 34px);
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .testimonials-subtitle {
+      font-size: 13px;
+      color: #d4d4d4;
+      margin-bottom: 34px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .testimonial-card {
+      position: relative;
+      background: #000000;
+      border-radius: 18px;
+      padding: 20px 18px 18px;
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+      text-align: left;
+      overflow: hidden;
+      isolation: isolate;
+      opacity: 0;
+      transform: translateY(28px);
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+
+    .testimonial-card:nth-child(1) { animation-delay: 0.12s; }
+    .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+    .testimonial-card:nth-child(3) { animation-delay: 0.28s; }
+
+    .testimonial-card::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 12px;
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      pointer-events: none;
+    }
+
+    .testimonial-card--highlight {
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .testimonial-stars {
+      color: #ffffff;
+      font-size: 13px;
+      margin-bottom: 12px;
+      letter-spacing: 0.2em;
+    }
+
+    .testimonial-quote {
+      font-size: 13px;
+      color: #e5e5e5;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .testimonial-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      background: #111111;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 12px 32px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .testimonial-card:hover .testimonial-avatar {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow:
+        0 16px 40px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.7);
+    }
+
+    .testimonial-person {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-name {
+      font-weight: 700;
+      font-size: 13px;
+      color: #ffffff;
+    }
+
+    .testimonial-role {
+      font-size: 11px;
+      color: #d4d4d4;
+    }
+
+    /* ========== FOOTER – B&W ========== */
+
+    .footer {
+      background: #000000;
+      color: #e5e7eb;
+      padding: 60px 16px 30px;
+      border-top: 1px solid #111827;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 65%);
+      top: -220px;
+      left: -160px;
+      filter: blur(8px);
+      opacity: 0.7;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .footer-top {
+      max-width: 1120px;
+      margin: 0 auto 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(0, 1fr));
+      gap: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.8;
+    }
+
+    .footer-links {
+      list-style: none;
+      font-size: 13px;
+    }
+
+    .footer-links li {
+      margin-bottom: 6px;
+    }
+
+    .footer-links a {
+      color: #e5e7eb;
+      opacity: 0.85;
+      position: relative;
+      padding-left: 14px;
+      transition: color 0.25s ease, opacity 0.25s ease, transform 0.2s ease;
+    }
+
+    .footer-links a::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 10px;
+      opacity: 0.7;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+      opacity: 1;
+      transform: translateX(2px);
+    }
+
+    .footer-social {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #f5f5f5;
+      box-shadow:
+        0 12px 26px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.25);
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .social-icon:hover {
+      transform: translateY(-2px);
+      background: #ffffff;
+      color: #020617;
+      box-shadow:
+        0 14px 30px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-line {
+      max-width: 1120px;
+      margin: 0 auto 12px;
+      border: none;
+      border-top: 1px solid #111827;
+    }
+
+    .footer-bottom {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .footer-bottom a {
+      color: #9ca3af;
+      transition: color 0.25s ease;
+    }
+
+    .footer-bottom a:hover {
+      color: #ffffff;
+    }
+
+    /* ========== SHARED ANIMATIONS ========== */
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== RESPONSIVE ========== */
+
+    @media (max-width: 1024px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      .properties {
+        gap: 18px;
+      }
+
+      .property-card,
+      .property-card.is-reverse {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .btn-details {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .footer-top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 70px;
+        padding-bottom: 50px;
+      }
+
+      .properties {
+        padding-bottom: 30px;
+      }
+
+      .property-features {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .testimonials-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .footer-top {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-shell">
+      <div class="navbar-left">
+        <div class="brand">ZIGSON</div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="feature-listings.html" class="active">Feature Listings</a></li>
+          <li><a href="contact-us.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <button type="button" class="nav-cta">+ Contact Us</button>
+      <button type="button" class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile side drawer -->
+  <div class="mobile-nav-overlay"></div>
+
+  <nav class="mobile-nav">
+    <div class="mobile-nav-header">
+      <span class="brand">ZIGSON</span>
+      <button type="button" class="mobile-close" aria-label="Close navigation">×</button>
+    </div>
+
+    <ul class="mobile-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="feature-listings.html" class="active">Feature Listings</a></li>
+      <li><a href="contact-us.html">Contact Us</a></li>
+    </ul>
+
+    <button type="button" class="mobile-nav-cta">+ Contact Us</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-panel">
+        <div class="hero-label">FEATURE LISTINGS</div>
+        <h1 class="hero-title">Find Your Dream<br>Home Today</h1>
+        <div class="hero-subline">
+          Discover premium properties handpicked for you. Modern living meets
+          timeless elegance in every listing.
+        </div>
+        <div class="hero-buttons">
+          <button class="btn-primary">Explore Now</button>
+          <button class="btn-outline">Learn More</button>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-right-label">ZIGSON REAL ESTATE</div>
+        <div class="hero-right-tag">FEATURED HOMES • 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED HEADING -->
+  <section class="featured-wrapper">
+    <div class="featured-inner">
+      <h2 class="featured-title">Featured Properties</h2>
+      <p class="featured-subtitle">
+        Browse our premium selection of handpicked properties
+      </p>
+      <div class="featured-underline"></div>
+    </div>
+  </section>
+
+  <!-- PROPERTY LIST -->
+  <section class="properties">
+
+    <!-- 1: California – Luxury Penthouse with Pool -->
+    <article class="property-card">
+      <div class="property-media">
+        <img src="https://www.cgarchitect.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcXBXIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--229816729edfd3f94ffdb568b4ec600b06b57b90/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9VY21WemFYcGxYM1J2WDJ4cGJXbDBXd2RwQWxZRk1Eb0tjMkYyWlhKN0Jqb01jWFZoYkdsMGVXbGsiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a140f81341e053a34b77dbf5e04e777cacb11aff/abe3dcd2.jpg"  alt="Contemporary Estate" />
+      </div>
+      <div class="property-info">
+        <span class="badge">California</span>
+        <h3 class="property-title">Luxury Penthouse with Pool</h3>
+        <p class="property-desc">
+          Modern penthouse with panoramic city views, infinity pool, and premium smart home features.
+        </p>
+
+        <div class="property-meta">
+          <div>
+            <span class="meta-label">Beds</span>
+            <span class="meta-value">4</span>
+          </div>
+          <div>
+            <span class="meta-label">Baths</span>
+            <span class="meta-value">3</span>
+          </div>
+          <div>
+            <span class="meta-label">Area</span>
+            <span class="meta-value">4,500 sqft</span>
+          </div>
+        </div>
+
+        <div class="property-features">
+          <div class="feature-item">Modern Design</div>
+          <div class="feature-item">Pool &amp; Spa</div>
+          <div class="feature-item">Smart Home</div>
+          <div class="feature-item">City Views</div>
+        </div>
+
+        <div class="property-price">$2,500,000</div>
+        <button class="btn-details">View Details</button>
+      </div>
+    </article>
+
+    <!-- 2: New York – Contemporary Estate -->
+    <article class="property-card is-reverse">
+      <div class="property-media">
+        <img src="https://i.ytimg.com/vi/AzFZ5dTgc_k/maxresdefault.jpg" alt="Contemporary Estate" />
+      </div>
+      <div class="property-info">
+        <span class="badge">New York</span>
+        <h3 class="property-title">Contemporary Estate</h3>
+        <p class="property-desc">
+          Stunning contemporary home with minimalist architecture and landscaped gardens.
+        </p>
+
+        <div class="property-meta">
+          <div>
+            <span class="meta-label">Beds</span>
+            <span class="meta-value">5</span>
+          </div>
+          <div>
+            <span class="meta-label">Baths</span>
+            <span class="meta-value">4</span>
+          </div>
+          <div>
+            <span class="meta-label">Area</span>
+            <span class="meta-value">6,200 sqft</span>
+          </div>
+        </div>
+
+        <div class="property-features">
+          <div class="feature-item">Contemporary</div>
+          <div class="feature-item">Large Garden</div>
+          <div class="feature-item">Minimalist</div>
+          <div class="feature-item">Natural Light</div>
+        </div>
+
+        <div class="property-price">$3,200,000</div>
+        <button class="btn-details">View Details</button>
+      </div>
+    </article>
+
+    <!-- 3: Miami – Beachfront Villa -->
+    <article class="property-card">
+      <div class="property-media">
+        <img src="https://a0.muscache.com/im/pictures/5ecac6c1-eb7b-4341-a452-74d1647ecfe2.jpg" alt="Beachfront Villa" />
+      </div>
+      <div class="property-info">
+        <span class="badge">Miami</span>
+        <h3 class="property-title">Beachfront Villa</h3>
+        <p class="property-desc">
+          Exclusive beachfront villa with private beach access and ocean views.
+        </p>
+
+        <div class="property-meta">
+          <div>
+            <span class="meta-label">Beds</span>
+            <span class="meta-value">6</span>
+          </div>
+          <div>
+            <span class="meta-label">Baths</span>
+            <span class="meta-value">5</span>
+          </div>
+          <div>
+            <span class="meta-label">Area</span>
+            <span class="meta-value">7,500 sqft</span>
+          </div>
+        </div>
+
+        <div class="property-features">
+          <div class="feature-item">Beach Access</div>
+          <div class="feature-item">Ocean View</div>
+          <div class="feature-item">Private Beach</div>
+          <div class="feature-item">Infinity Pool</div>
+        </div>
+
+        <div class="property-price">$4,800,000</div>
+        <button class="btn-details">View Details</button>
+      </div>
+    </article>
+
+    <!-- 4: Texas – Luxury Penthouse with Pool -->
+    <article class="property-card is-reverse">
+      <div class="property-media">
+        <img src="https://about.hawaiilife.com/wp-content/uploads/2019/10/penthouse-1.jpg" alt="Luxury Penthouse with Pool Texas" />
+      </div>
+      <div class="property-info">
+        <span class="badge">Texas</span>
+        <h3 class="property-title">Luxury Penthouse with Pool</h3>
+        <p class="property-desc">
+          Modern penthouse with panoramic city views, infinity pool, and premium smart home features.
+        </p>
+
+        <div class="property-meta">
+          <div>
+            <span class="meta-label">Beds</span>
+            <span class="meta-value">4</span>
+          </div>
+          <div>
+            <span class="meta-label">Baths</span>
+            <span class="meta-value">3</span>
+          </div>
+          <div>
+            <span class="meta-label">Area</span>
+            <span class="meta-value">4,500 sqft</span>
+          </div>
+        </div>
+
+        <div class="property-features">
+          <div class="feature-item">Modern Design</div>
+          <div class="feature-item">Pool &amp; Spa</div>
+          <div class="feature-item">Smart Home</div>
+          <div class="feature-item">City Views</div>
+        </div>
+
+        <div class="property-price">$2,500,000</div>
+        <button class="btn-details">View Details</button>
+      </div>
+    </article>
+
+    <!-- 5: Florida – Contemporary Estate -->
+    <article class="property-card">
+      <div class="property-media">
+        <img src="https://affinitiarchitects.com/wp-content/uploads/UEARender_2-e1479765617664.jpg" alt="Contemporary Estate Florida" />
+      </div>
+      <div class="property-info">
+        <span class="badge">Florida</span>
+        <h3 class="property-title">Contemporary Estate</h3>
+        <p class="property-desc">
+          Stunning contemporary home with minimalist architecture and landscaped gardens.
+        </p>
+
+        <div class="property-meta">
+          <div>
+            <span class="meta-label">Beds</span>
+            <span class="meta-value">5</span>
+          </div>
+          <div>
+            <span class="meta-label">Baths</span>
+            <span class="meta-value">4</span>
+          </div>
+          <div>
+            <span class="meta-label">Area</span>
+            <span class="meta-value">6,200 sqft</span>
+          </div>
+        </div>
+
+        <div class="property-features">
+          <div class="feature-item">Contemporary</div>
+          <div class="feature-item">Large Garden</div>
+          <div class="feature-item">Minimalist</div>
+          <div class="feature-item">Natural Light</div>
+        </div>
+
+        <div class="property-price">$3,200,000</div>
+        <button class="btn-details">View Details</button>
+      </div>
+    </article>
+
+    <!-- 6: Los Angeles – Beachfront Villa -->
+    <article class="property-card is-reverse">
+      <div class="property-media">
+        <img src="https://images.dwell.com/photos-6341792553403916288/6364258267560710144-large/modern-beach-house.jpg" alt="Beachfront Villa Los Angeles" />
+      </div>
+      <div class="property-info">
+        <span class="badge">Los Angeles</span>
+        <h3 class="property-title">Beachfront Villa</h3>
+        <p class="property-desc">
+          Exclusive beachfront villa with private beach access and ocean views.
+        </p>
+
+        <div class="property-meta">
+          <div>
+            <span class="meta-label">Beds</span>
+            <span class="meta-value">6</span>
+          </div>
+          <div>
+            <span class="meta-label">Baths</span>
+            <span class="meta-value">5</span>
+          </div>
+          <div>
+            <span class="meta-label">Area</span>
+            <span class="meta-value">7,500 sqft</span>
+          </div>
+        </div>
+
+        <div class="property-features">
+          <div class="feature-item">Beach Access</div>
+          <div class="feature-item">Ocean View</div>
+          <div class="feature-item">Private Beach</div>
+          <div class="feature-item">Infinity Pool</div>
+        </div>
+
+        <div class="property-price">$4,800,000</div>
+        <button class="btn-details">View Details</button>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- CALL TO ACTION STRIP -->
+  <section class="cta-strip">
+    <div class="cta-inner">
+      <h2 class="cta-title">Have Your Own Property?</h2>
+      <p class="cta-subtitle">
+        List it with us and reach thousands of qualified buyers instantly.
+      </p>
+      <button class="cta-button">Submit Listing Now</button>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="testimonials-inner">
+      <h2 class="testimonials-title">What Happy Clients Say</h2>
+      <p class="testimonials-subtitle">
+        See what our satisfied customers have to say about their experience
+      </p>
+
+      <div class="testimonials-grid">
+        <!-- Card 1 -->
+        <article class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">
+            "Zigson made finding our dream home incredibly easy! Professional and dedicated team."
+          </p>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar">JD</div>
+            <div class="testimonial-person">
+              <span class="testimonial-name">John Doe</span>
+              <span class="testimonial-role">Happy Homeowner</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">
+            "I sold my property above market value. Outstanding service and transparency throughout!"
+          </p>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar">JS</div>
+            <div class="testimonial-person">
+              <span class="testimonial-name">Jane Smith</span>
+              <span class="testimonial-role">Property Seller</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 (highlight) -->
+        <article class="testimonial-card testimonial-card--highlight">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">
+            "Best real estate investment guidance I could ask for. Highly recommended for investors!"
+          </p>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar">MJ</div>
+            <div class="testimonial-person">
+              <span class="testimonial-name">Mike Johnson</span>
+              <span class="testimonial-role">Real Estate Investor</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <h3 class="footer-title">ABOUT ZIGSON</h3>
+        <p class="footer-text">
+          Premium real estate solutions trusted by thousands of homeowners and investors nationwide.
+        </p>
+        <div class="footer-social">
+          <div class="social-icon">f</div>
+          <div class="social-icon">t</div>
+          <div class="social-icon">in</div>
+          <div class="social-icon">ig</div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="footer-title">QUICK LINKS</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="feature-listings.html">Featured Listing</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact-us.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-title">RESOURCES</h3>
+        <ul class="footer-links">
+          <li><a href="#">Buying Guide</a></li>
+          <li><a href="#">Selling Tips</a></li>
+          <li><a href="#">Market Report</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-title">CONTACT</h3>
+        <ul class="footer-links">
+          <li><a href="mailto:info@zigson.com">info@zigson.com</a></li>
+          <li><a href="tel:+18001234567">+1 (800) 123-4567</a></li>
+          <li><a href="#">123 Real Estate Ave, CA 90210</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="footer-line" />
+
+    <div class="footer-bottom">
+      <p>© 2025 Zigson Real Estate. All rights reserved.</p>
+      <p>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- JS: MOBILE NAV -->
+  <script>
+    (function () {
+      const toggle = document.querySelector('.nav-toggle');
+      const overlay = document.querySelector('.mobile-nav-overlay');
+      const closeBtn = document.querySelector('.mobile-close');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+
+      function openNav() {
+        document.body.classList.add('nav-open');
+      }
+
+      function closeNav() {
+        document.body.classList.remove('nav-open');
+      }
+
+      if (toggle) {
+        toggle.addEventListener('click', function () {
+          if (document.body.classList.contains('nav-open')) {
+            closeNav();
+          } else {
+            openNav();
+          }
+        });
+      }
+
+      if (overlay) overlay.addEventListener('click', closeNav);
+      if (closeBtn) closeBtn.addEventListener('click', closeNav);
+
+      mobileLinks.forEach(function (link) {
+        link.addEventListener('click', closeNav);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeNav();
+      });
+    })();
+  </script>
+</body>
+</html>
