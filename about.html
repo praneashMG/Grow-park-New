@@ -25,58 +25,69 @@
     }
 
     /* ---------- NAVBAR – OLD B&W PILL ---------- */
+ /* ========== NAVBAR – OLD B&W PILL STYLE ========== */
 
     .navbar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 70px;
+      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 50;
+      z-index: 60;
       pointer-events: none;
     }
 
-    .navbar > * {
+    .nav-shell {
       pointer-events: auto;
+      width: min(1120px, 100% - 24px);
+      height: 60px;
+      border-radius: 999px;
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow:
+        0 22px 50px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .nav-shell:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 30px 70px rgba(0, 0, 0, 1),
+        0 0 0 1px rgba(255, 255, 255, 0.12);
     }
 
     .navbar-left {
       display: flex;
       align-items: center;
-      gap: 32px;
-    }
-
-    .navbar-inner {
-      width: min(1120px, 100% - 24px);
-      height: 60px;
-      border-radius: 999px;
-      background: #000000;
-      border: 1px solid rgba(255,255,255,0.16);
-      box-shadow:
-        0 20px 40px rgba(0,0,0,0.9),
-        0 0 0 1px rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      transform-style: preserve-3d;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .navbar-inner:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 30px 60px rgba(0,0,0,1),
-        0 0 0 1px rgba(255,255,255,0.12);
+      gap: 26px;
+      position: relative;
+      z-index: 1;
     }
 
     .brand {
       font-weight: 900;
-      font-size: 20px;
-      letter-spacing: 0.18em;
+      font-size: 18px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #ffffff;
       position: relative;
@@ -85,29 +96,29 @@
     .brand::before {
       content: "ZIGSON";
       position: absolute;
-      left: 2px;
-      top: 2px;
+      left: 1px;
+      top: 1px;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(255,255,255,0.5);
-      opacity: 0.6;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+      opacity: 0.7;
       pointer-events: none;
     }
 
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 22px;
-      font-size: 12px;
+      gap: 18px;
+      font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
     }
 
     .nav-links a {
       position: relative;
-      color: #f9fafb;
+      color: #f5f5f5;
       padding-bottom: 4px;
-      transition: color 0.2s ease, transform 0.2s ease;
-      opacity: 0.9;
+      opacity: 0.8;
+      transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
     }
 
     .nav-links a::after {
@@ -118,10 +129,10 @@
       width: 0;
       height: 2px;
       background: #ffffff;
-      box-shadow: 0 0 8px rgba(255,255,255,0.8);
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
       transform-origin: left;
-      transform: skewX(-8deg);
-      transition: width 0.22s ease;
+      transform: skewX(-10deg);
+      transition: width 0.2s ease;
     }
 
     .nav-links a:hover::after,
@@ -130,8 +141,8 @@
     }
 
     .nav-links a:hover {
-      transform: translateY(-1px);
       opacity: 1;
+      transform: translateY(-1px);
     }
 
     .nav-links a.active {
@@ -139,19 +150,21 @@
     }
 
     .nav-cta {
+      position: relative;
+      z-index: 1;
       padding: 9px 20px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.7);
+      border: 1px solid rgba(255, 255, 255, 0.7);
       background: #ffffff;
       color: #000000;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 0.22em;
       box-shadow:
-        0 8px 0 #cfcfcf,
-        0 20px 30px rgba(0,0,0,1);
+        0 8px 0 #d4d4d4,
+        0 18px 30px rgba(0, 0, 0, 1);
       transform: translateY(0);
       transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
     }
@@ -159,113 +172,25 @@
     .nav-cta:hover {
       transform: translateY(2px);
       box-shadow:
-        0 4px 0 #cfcfcf,
-        0 12px 18px rgba(0,0,0,1);
-      background: #f4f4f4;
+        0 4px 0 #d4d4d4,
+        0 10px 16px rgba(0, 0, 0, 1);
+      background: #f3f3f3;
     }
 
     .nav-cta:active {
       transform: translateY(5px);
       box-shadow:
-        0 0 0 #cfcfcf,
-        0 6px 10px rgba(0,0,0,1);
+        0 0 0 #d4d4d4,
+        0 6px 10px rgba(0, 0, 0, 1);
     }
 
-    /* NAV WRAPPER so we can use existing markup easily */
-    header.navbar {
-      display: flex;
-    }
-
-    header.navbar > .navbar-left,
-    header.navbar > .nav-cta,
-    header.navbar > .nav-toggle {
-      display: none;
-    }
-
-    /* we’ll nest inside a new inner container using CSS only */
-    header.navbar::before {
-      content: "";
-    }
-
-    header.navbar {
-      justify-content: center;
-    }
-
-    header.navbar > div.navbar-left,
-    header.navbar > button.nav-cta,
-    header.navbar > button.nav-toggle {
-      /* fallback if JS manipulates; overridden below in mobile */
-    }
-
-    /* Build structure using existing elements */
-    header.navbar {
-      padding: 0 8px;
-    }
-
-    header.navbar .navbar-left,
-    header.navbar .nav-cta,
-    header.navbar .nav-toggle {
-      /* hidden at desktop, re-used on mobile */
-    }
-
-    /* We’ll recreate the old layout using a wrapper via :has in modern browsers would help,
-       but to keep it simple, wrap inside a flex row: */
-
-    .navbar-inner {
-      display: flex;
-    }
-
-    .navbar-inner-left {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    /* We’ll reuse .navbar-left content inside .navbar-inner-left via HTML tweak:
-       but user asked “no content change”, so instead we treat .navbar-left AS inner-left. */
-    .navbar .navbar-left {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    /* Override nav at desktop explicitly */
-    @media (min-width: 901px) {
-      header.navbar {
-        height: 76px;
-      }
-
-      header.navbar > .navbar-left,
-      header.navbar > .nav-cta,
-      header.navbar > .nav-toggle {
-        position: static;
-      }
-
-      header.navbar {
-        display: flex;
-      }
-
-      header.navbar .navbar-left {
-        display: flex;
-      }
-
-      header.navbar .nav-cta {
-        display: inline-flex;
-      }
-
-      .navbar-inner {
-        width: min(1120px, 100% - 24px);
-      }
-    }
-
-    /* MOBILE NAV + TOGGLE (reusing your structure) */
-
+    /* Mobile toggle */
     .nav-toggle {
       display: none;
       width: 40px;
       height: 40px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.6);
+      border: 1px solid rgba(255, 255, 255, 0.6);
       background: #000000;
       padding: 8px;
       cursor: pointer;
@@ -275,8 +200,8 @@
       gap: 4px;
       box-shadow:
         0 8px 0 #111111,
-        0 16px 24px rgba(0,0,0,0.8);
-      z-index: 51;
+        0 16px 22px rgba(0, 0, 0, 0.9);
+      z-index: 61;
     }
 
     .nav-toggle span {
@@ -302,11 +227,11 @@
     .mobile-nav-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.75);
+      background: rgba(0, 0, 0, 0.75);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s ease;
-      z-index: 49;
+      z-index: 55;
     }
 
     .mobile-nav {
@@ -322,8 +247,8 @@
       flex-direction: column;
       gap: 20px;
       transition: transform 0.28s ease;
-      z-index: 50;
-      box-shadow: -20px 0 50px rgba(0,0,0,1);
+      z-index: 56;
+      box-shadow: -22px 0 50px rgba(0, 0, 0, 1);
     }
 
     body.nav-open .mobile-nav {
@@ -345,7 +270,6 @@
     .mobile-nav-header .brand {
       font-size: 16px;
       letter-spacing: 0.18em;
-      color: #ffffff;
     }
 
     .mobile-close {
@@ -371,9 +295,9 @@
       display: block;
       padding: 10px 4px;
       color: #e5e5e5;
-      font-size: 14px;
+      font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       border-radius: 8px;
       transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
     }
@@ -387,56 +311,27 @@
 
     .mobile-nav-cta {
       margin-top: 10px;
-      padding: 12px 16px;
+      padding: 11px 16px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.7);
+      border: 1px solid rgba(255, 255, 255, 0.7);
       background: #ffffff;
       color: #000000;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       cursor: pointer;
       box-shadow:
-        0 10px 0 #cfcfcf,
-        0 22px 32px rgba(0,0,0,1);
+        0 10px 0 #d4d4d4,
+        0 22px 30px rgba(0, 0, 0, 1);
       transition: 0.25s ease;
     }
 
     .mobile-nav-cta:hover {
       transform: translateY(2px);
       box-shadow:
-        0 4px 0 #cfcfcf,
-        0 12px 18px rgba(0,0,0,1);
-    }
-
-    @media (max-width: 900px) {
-      .navbar {
-        justify-content: space-between;
-        padding: 0 14px;
-      }
-
-      .navbar-inner {
-        background: transparent;
-        border: none;
-        box-shadow: none;
-        width: 100%;
-        justify-content: space-between;
-        padding: 0;
-      }
-
-      .nav-links,
-      .nav-cta {
-        display: none;
-      }
-
-      .navbar .brand {
-        font-size: 18px;
-      }
-
-      .nav-toggle {
-        display: inline-flex;
-      }
+        0 4px 0 #d4d4d4,
+        0 14px 20px rgba(0, 0, 0, 1);
     }
 
     /* ---------- HERO ABOUT – MONOCHROME ---------- */
@@ -1043,16 +938,15 @@
   </style>
 </head>
 <body>
-
-  <!-- NAVBAR -->
+     <!-- NAVBAR -->
   <header class="navbar">
-    <div class="navbar-inner">
+    <div class="nav-shell">
       <div class="navbar-left">
         <div class="brand">ZIGSON</div>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html" class="active">About Us</a></li>
-          <li><a href="feature-listings.html">Feature Listings</a></li>
+          <li><a href="feature-listings.html" >Feature Listings</a></li>
           <li><a href="contact-us.html">Contact Us</a></li>
         </ul>
       </div>
@@ -1075,13 +969,12 @@
     <ul class="mobile-nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html" class="active">About Us</a></li>
-      <li><a href="feature-listings.html">Feature Listings</a></li>
+      <li><a href="feature-listings.html" >Feature Listings</a></li>
       <li><a href="contact-us.html">Contact Us</a></li>
     </ul>
 
     <button type="button" class="mobile-nav-cta">+ Contact Us</button>
   </nav>
-
   <!-- HERO -->
   <section class="about-hero">
     <div class="about-hero-content">
